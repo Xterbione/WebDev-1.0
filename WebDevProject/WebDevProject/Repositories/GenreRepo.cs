@@ -20,13 +20,31 @@ namespace WebDevProject.Repositories
         public IEnumerable<GenreModel> Get()
         {
             string sql = "SELECT * " +
-                "FROM genre ";
-
-
+                         "FROM genre ";
             using var connection = GetConnection();
             //normal query for list
             var strips = connection.Query<GenreModel>(sql);
             return strips;
+        }
+        
+        
+        public void DeleteSingle(string? genreUitDeList)
+        {
+            //the query
+            string sql = @"DELETE FROM genre WHERE genre = @genreUitDeList";
+            //the connection
+            using var connection = GetConnection();
+            //executes query
+            connection.Execute(sql, new {genreUitDeList});
+        }
+        
+        public void insert(string genre)
+        {
+            using var connection = GetConnection();
+            var sql = @"
+                INSERT INTO genre (genre) 
+                VALUES (@genre)";
+            var removeSeparate = connection.Execute(sql, new {genre});
         }
     }
 }
