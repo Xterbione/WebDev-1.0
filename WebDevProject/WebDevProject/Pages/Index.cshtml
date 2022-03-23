@@ -1,0 +1,41 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>bekijk onze database.</p>
+</div>
+<div class="row d-flex justify-content-around">
+    @foreach (var item in @Model.StripboekModels)
+    {
+        <div class="card col-3 mb-3" style="width: 18rem;">
+            <img src="https://us.123rf.com/450wm/piotrurakau/piotrurakau1707/piotrurakau170700026/82024829-de-grappige-achtergrond-van-de-boekpagina-met-lege-kleurrijke-toespraakbellen-in-pop-artstijl-strale.jpg?ver=6" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"> @item.stripboektitel </h5>
+                <p class="card-text">
+                <ul>
+                    <li>volgnummer: @item.volgnummer</li>
+                    <li>Aantal pagina's: @item.aantal_paginas</li>
+                    <li>Serie: @item.SerieModel.serieTitel</li>
+                    @{ //Laat zien of de serie nog lopend is
+                        if (item.SerieModel.lopend == 1)
+                        {
+                            <li>Serie lopend: ja</li>
+                        }
+                        else if (item.SerieModel.lopend == 0)
+                        {
+                            <li>Serie lopend: nee</li>
+                        }
+                    }
+                    <li>Genre: @item.GenreModel.genre</li>
+                </ul>
+                <a href="#" class="btn btn-primary">Bekijk stripboek</a>
+            </div>
+        </div>
+    }
+
+</div>

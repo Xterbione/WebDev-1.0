@@ -1,0 +1,40 @@
+@page
+@model WebDevProject.Pages.MijnCollectie
+
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+<div class="row d-flex justify-content-around">
+    @foreach (var item in @Model.WordtOpgeslagenInCollectieVanModels)
+    {
+        <div class="card col-3 mb-3" style="width: 18rem;">
+            <img src="https://us.123rf.com/450wm/piotrurakau/piotrurakau1707/piotrurakau170700026/82024829-de-grappige-achtergrond-van-de-boekpagina-met-lege-kleurrijke-toespraakbellen-in-pop-artstijl-strale.jpg?ver=6" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"> @item.DrukModel.StripboekModel.stripboektitel </h5>
+                <p class="card-text">
+                <ul>
+                    <li>druknummer: @item.DrukModel.druknummer</li>
+                    <li>druk datum: @item.DrukModel.druk_datum</li>
+                    <li>oplage: @item.DrukModel.oplage</li>
+                    <li>volgnummer: @item.DrukModel.StripboekModel.volgnummer</li>
+                    <li>Genre: @item.DrukModel.StripboekModel.GenreModel.genre</li>
+                    
+                </ul>
+
+
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    }
+</div>
+</body>
+</html>

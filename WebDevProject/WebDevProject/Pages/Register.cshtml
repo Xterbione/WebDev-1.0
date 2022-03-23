@@ -1,0 +1,57 @@
+@page
+@model WebDevProject.Pages.Register
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Account Aanmaken</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>    
+    <link asp-append-version="true" href="~/css/register.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="global-container">
+    <div class="div card login-form">
+        <div class="card-body">
+            <h1 class="card-title text-center">Registreren</h1>
+            <div class="card-text">
+                <form method="post">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text"
+                               asp-for="gebruikersnaam"
+                               class="form-control form-control-sm"
+                               id="name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email"
+                               asp-for="email"
+                               class="form-control form-control-sm"
+                               id="email"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="geboortedatum">Birthday</label>
+                        <input type="datetime-local"
+                               asp-for="geboortedatum"
+                               class="form-control form-control-sm"
+                               id="geboortedatum"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password"
+                               asp-for="wachtwoord"
+                               class="form-control form-control-sm"
+                               id="password"/>
+                    </div>
+                    <div><p>@Model.Message</p></div>
+                    <button type="submit" class="btn btn-light">Registreren</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
