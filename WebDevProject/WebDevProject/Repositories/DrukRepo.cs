@@ -28,7 +28,6 @@ namespace WebDevProject.Repositories
         /// <returns></returns>
         public IEnumerable<DrukModel> Get()
         {
-
             using var connection = GetConnection();
             //normal query for list
             IEnumerable<DrukModel> strips = connection
@@ -50,6 +49,12 @@ namespace WebDevProject.Repositories
             return strips;
         }
 
+        /// <summary>
+        /// Zoekfunctie om te zoeken in de database.
+        /// </summary>
+        /// <param name="selected">isbn of stripboektitel </param>
+        /// <param name="search"></param>
+        /// <returns></returns>
         public IEnumerable<DrukModel> Search(string selected, string search)
         {
             switch (selected)
@@ -61,23 +66,7 @@ namespace WebDevProject.Repositories
                     sql = sql + "WHERE Stripboek.stripboektitel LIKE @search";
                     search = $"%{search}%";
                     break;
-                default:
-                    sql = sql;
-                    break;
             }
-
-            // string sql = "SELECT * " +
-            //     "FROM druk " +
-            //     "INNER JOIN Stripboek on stripboek.stripboek_id = druk.stripboek_id " +
-            //     "INNER JOIN serie on stripboek.serie_id = serie.serie_id " +
-            //     "INNER JOIN genre on stripboek.genre_id = genre.genre_id";
-            sql = "SELECT * " +
-                  "FROM druk " +
-                  "INNER JOIN stripboek on stripboek.stripboekId = druk.stripboek_id " +
-                  "INNER JOIN serie on serie_id = serie.serieId " +
-                  "INNER JOIN genre on genre_id = genre.genreId";
-
-
 
             using var connection = GetConnection();
             //normal query for list
