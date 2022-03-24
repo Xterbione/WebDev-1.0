@@ -32,7 +32,6 @@ public class UitgeverRepo
     public void DeleteSingle(string? uitgeverUitList)
     {
         //the query
-        string sql = @"DELETE FROM genre WHERE genre = @uitgeverUitList";
         string sql = @"DELETE FROM uitgever WHERE uitgever_naam = @uitgeverUitList";
         //the connection
         using var connection = GetConnection();
