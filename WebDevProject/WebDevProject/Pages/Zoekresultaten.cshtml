@@ -1,4 +1,6 @@
 @page
+@using WebDevProject.Models
+@using WebDevProject.Repositories
 @model WebDevProject.Pages.Zoekresultaten
 
 
@@ -19,8 +21,17 @@
                     <h5 class="card-title"> @item.StripboekModel.stripboektitel </h5>
                     <p class="card-text">
                     <ul>
-                        <li>volgnummer: @item.StripboekModel.volgnummer</li>
+                        <li>Druknummer: @item.druknummer</li>
+                        <li>Druk datum: @item.druk_datum</li>
+                        <li>Oplage: @item.oplage</li>
+                        <li>Waarde: @item.waarde</li>
                         <li>Serie: @item.StripboekModel.SerieModel.serieTitel</li>
+                        @{
+                            foreach (var item3 in item.werkenAan)
+                            {
+                                <li>@(item3.rol): @item3.CreatorModel.creator_naam</li>
+                            }
+                        }
                         @{
                             if (item.StripboekModel.SerieModel.lopend == 1)
                             {
