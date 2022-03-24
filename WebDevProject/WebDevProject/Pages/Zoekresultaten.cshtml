@@ -44,7 +44,10 @@
                         }
                         <li>Isbn: @item.isbn</li>
                     </ul>
-                    <a href="#" class="btn btn-primary">Bekijk stripboek</a>
+                    <form method="post">
+                        <button value="@item.stripboek_id" class="btn btn-primary">Bekijk stripboek</button>
+                    </form>
+                    
                 </div>
             </div>
         }
