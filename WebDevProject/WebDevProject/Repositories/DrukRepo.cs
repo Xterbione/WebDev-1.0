@@ -17,8 +17,6 @@ namespace WebDevProject.Repositories
                      "INNER JOIN Stripboek on stripboek.stripboekId = druk.stripboek_id " +
                      "INNER JOIN serie on stripboek.serie_id = serie.serieId " +
                      "INNER JOIN genre on stripboek.genre_id = genre.genreId " +
-                     "INNER JOIN Werkt_aan on Druk.drukId = Werkt_aan.druk_id " +
-                     "INNER JOIN Creator on Werkt_aan.creator_id = Creator.creatorId " +
                      "INNER JOIN Uitgever on Druk.uitgever_id = Uitgever.uitgeverId ";
 
 
@@ -31,20 +29,17 @@ namespace WebDevProject.Repositories
             using var connection = GetConnection();
             //normal query for list
             IEnumerable<DrukModel> strips = connection
-                .Query<DrukModel, StripboekModel, SerieModel, GenreModel, WerktAanModel, CreatorModel, UitgeverModel
+                .Query<DrukModel, StripboekModel, SerieModel, GenreModel, UitgeverModel
                     , DrukModel>(sql,
-                    (DrukModel, StripboekModel, SerieModel, GenreModel, WerktAanModel, CreatorModel,
-                        UitgeverModel) =>
+                    (DrukModel, StripboekModel, SerieModel, GenreModel, UitgeverModel) =>
                     {
                         //vul het main object met de aangemaakte objecten
                         StripboekModel.SerieModel = SerieModel;
                         StripboekModel.GenreModel = GenreModel;
                         DrukModel.StripboekModel = StripboekModel;
-                        DrukModel.CreatorModel = CreatorModel;
-                        DrukModel.WerktAanModel = WerktAanModel;
                         DrukModel.UitgeverModel = UitgeverModel;
                         return DrukModel;
-                    }, splitOn: "stripboekId, serieId, genreId, creator_id, creatorId, uitgeverId",
+                    }, splitOn: "stripboekId, serieId, genreId, uitgeverId",
                     commandType: CommandType.Text);
             return strips;
         }
@@ -72,20 +67,16 @@ namespace WebDevProject.Repositories
             //normal query for list
             IEnumerable<DrukModel> strips =
                 connection
-                    .Query<DrukModel, StripboekModel, SerieModel, GenreModel, WerktAanModel, CreatorModel, UitgeverModel
-                        , DrukModel>(sql,
-                        (DrukModel, StripboekModel, SerieModel, GenreModel, WerktAanModel, CreatorModel,
-                            UitgeverModel) =>
+                    .Query<DrukModel, StripboekModel, SerieModel, GenreModel, UitgeverModel, DrukModel>(sql,
+                        (DrukModel, StripboekModel, SerieModel, GenreModel, UitgeverModel) =>
                         {
                             //vul het main object met de aangemaakte objecten
                             StripboekModel.SerieModel = SerieModel;
                             StripboekModel.GenreModel = GenreModel;
                             DrukModel.StripboekModel = StripboekModel;
-                            DrukModel.CreatorModel = CreatorModel;
-                            DrukModel.WerktAanModel = WerktAanModel;
                             DrukModel.UitgeverModel = UitgeverModel;
                             return DrukModel;
-                        }, new {search}, splitOn: "stripboekId, serieId, genreId, creator_id, creatorId, uitgeverId");
+                        }, new {search}, splitOn: "stripboekId, serieId, genreId, uitgeverId");
             return strips;
         }
     }
