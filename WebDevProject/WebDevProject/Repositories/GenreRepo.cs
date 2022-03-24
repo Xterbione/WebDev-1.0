@@ -46,5 +46,12 @@ namespace WebDevProject.Repositories
                 VALUES (@genre)";
             var removeSeparate = connection.Execute(sql, new {genre});
         }
+        public void Update(int genreId, string genre)
+        {
+            using var connection = GetConnection();
+            var sql = @"
+                UPDATE genre SET genre=@genre WHERE genreId=@genreId";
+            var removeSeparate = connection.Execute(sql, new {genre, genreId});
+        }
     }
 }

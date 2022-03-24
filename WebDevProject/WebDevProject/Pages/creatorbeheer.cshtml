@@ -1,9 +1,10 @@
 @page
-@model WebDevProject.Pages.genrebeheer
+@model WebDevProject.Pages.creatorbeheer
 
 @{
     Layout = "Shared/_Layout";
 }
+
 
 <div class="container pt-3 pb-5">
     <div class="row">
@@ -11,24 +12,19 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">Genre</th>
+                    <th scope="col">Uitgevers</th>
                     <th scope="col">Delete</th>
-                    <th scope="col">Update Genre</th>
-                    <th scope="col">Update</th>
 
                 </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in @Model.genres)
+                @foreach (var item in @Model.creators)
                 {
                     <tr>
-                        <td>@item.genre</td>
+                        <td>@item.creator_naam</td>
                         <form method="post">
-                            
+                            <input type="hidden" name="hiddenCreator" value="@item.creator_naam"/>
                             <td><button asp-page-handler="delete" class="btn btn-danger">Delete</button></td>
-                            <input type="hidden" name="hiddenGenre" value="@item.genreId"/>
-                            <td> <input type="text" name="genre" value="@item.genre" placeholder="Update Genre"/></td>
-                            <td><button asp-page-handler="update" class="btn btn-primary">Update</button></td>
                         </form>
                     </tr>
                 }
@@ -38,9 +34,9 @@
         
         <div class="col">
             <form method="post" class="d-inline mt-10" asp-page-handler="add">
-                <h1>Enter a genre here</h1>
-                <input type="text" name="genre" asp-for="genre" placeholder="Enter a Genre" required="required"/>
-                <button type="submit" name="add" class="btn btn-primary">Add Genre</button>
+                <h1>Creator toevoegen</h1>
+                <input type="text" asp-for="creator" placeholder="Enter a Creator" required="required"/>
+                <button type="submit" name="add" class="btn btn-primary">Add uitgever</button>
             </form>
             <div class="row pt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad assumenda dolores dolorum eius, eos eum itaque iure maiores maxime officia quaerat quas quod quos similique, soluta totam ut veritatis, voluptatem.</div> 
         </div>
