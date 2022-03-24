@@ -9,21 +9,18 @@ public class Zoekresultaten : PageModel
 {
     [BindProperty(SupportsGet = true)] public string Search { get; set; }
     [BindProperty(SupportsGet = true)] public string Option { get; set; }
-    public IEnumerable<StripboekModel> StripboekModels { get; set; }
-    public StripBoekRepo stripboekRepo = new();
-    
+
+    public IEnumerable<DrukModel> DrukModels { get; set; } 
+    public DrukRepo drukRepro = new();
+
     public void OnGet()
     {
-        
-    }
-
-    public void OnPost()
-    {
-        StripboekModels = stripboekRepo.Get();
+        Search = Search.ToLower();
+        DrukModels = drukRepro.Get();
         if (Search != "" && Option != "")
         {
-            StripboekModels = stripboekRepo.Search(Option, Search);
+            DrukModels = drukRepro.Search(Option, Search);
         }
-        
     }
 }
+    
