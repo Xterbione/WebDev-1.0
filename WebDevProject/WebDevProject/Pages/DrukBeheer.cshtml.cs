@@ -5,7 +5,7 @@ using WebDevProject.Repositories;
 
 namespace WebDevProject.Pages
 {
-    public class DrukManagerModel : PageModel
+    public class DrukBeheerModel : PageModel
     {
         //for deleting creators
         [BindProperty]
