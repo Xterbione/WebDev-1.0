@@ -1,19 +1,18 @@
 @page
-@model WebDevProject.Pages.MijnCollectie
+@model WebDevProject.Pages.Collectie.Index
 
-@{
-    Layout = "~/Pages/Shared/_Layout.cshtml";
-}
-
-<!DOCTYPE html>
-
-<html>
 <head>
-    <title></title>
+    <title>Mijn Collectie</title>
 </head>
 <body>
-
+<div>
+    <h1>Collectie van @Model.Gebruiker.gebruikersnaam</h1>
+</div>
 <div class="row d-flex justify-content-around">
+    @foreach (var item in @Model.WordtOpgeslagenInCollectieVanModels)
+    {
+        
+    }
     @foreach (var item in @Model.WordtOpgeslagenInCollectieVanModels)
     {
         <div class="card col-3 mb-3" style="width: 18rem;">
@@ -27,14 +26,12 @@
                     <li>oplage: @item.DrukModel.oplage</li>
                     <li>volgnummer: @item.DrukModel.StripboekModel.volgnummer</li>
                     <li>Genre: @item.DrukModel.StripboekModel.GenreModel.genre</li>
-                    
                 </ul>
 
 
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a class="btn btn-primary" asp-page="@nameof(Stripboek)" asp-route-stripboekId="@item.DrukModel.stripboek_id">Bekijk stripboek</a>
             </div>
         </div>
     }
 </div>
 </body>
-</html>

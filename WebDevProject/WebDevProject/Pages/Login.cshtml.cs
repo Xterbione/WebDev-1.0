@@ -35,7 +35,7 @@ public class Login : PageModel
                     var cockie = JsonSerializer.Serialize<GebruikerModel>(user);
                     HttpContext.Session.SetString("cockie",cockie.ToString());
                     Message = "Login Succesful";
-                    return new RedirectToPageResult("/Index");
+                    return new RedirectToPageResult("/collectie/index");
                 }
 
                 Message = "Wachtwoord is niet juist";
