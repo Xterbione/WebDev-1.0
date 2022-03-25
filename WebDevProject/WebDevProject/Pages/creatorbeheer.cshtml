@@ -1,9 +1,5 @@
 @page
-@model WebDevProject.Pages.uitgeverbeheer
-
-@{
-    Layout = null;
-}
+@model WebDevProject.Pages.creatorbeheer
 
 @{
     Layout = "Shared/_Layout";
@@ -22,12 +18,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in @Model.uitgevers)
+                @foreach (var item in @Model.creators)
                 {
                     <tr>
-                        <td>@item.uitgever_naam</td>
+                        <td>@item.creator_naam</td>
                         <form method="post">
-                            <input type="hidden" name="hiddenUitgever" value="@item.uitgever_naam"/>
+                            <input type="hidden" name="hiddenCreator" value="@item.creator_naam"/>
                             <td><button asp-page-handler="delete" class="btn btn-danger">Delete</button></td>
                         </form>
                     </tr>
@@ -38,8 +34,8 @@
         
         <div class="col">
             <form method="post" class="d-inline mt-10" asp-page-handler="add">
-                <h1>Uitgever toevoegen</h1>
-                <input type="text" asp-for="uitgever" placeholder="Enter a uitgever" required="required"/>
+                <h1>Creator toevoegen</h1>
+                <input type="text" asp-for="creator" placeholder="Enter a Creator" required="required"/>
                 <button type="submit" name="add" class="btn btn-primary">Add uitgever</button>
             </form>
             <div class="row pt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad assumenda dolores dolorum eius, eos eum itaque iure maiores maxime officia quaerat quas quod quos similique, soluta totam ut veritatis, voluptatem.</div> 
