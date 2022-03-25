@@ -18,9 +18,9 @@ public class genrebeheer : PageModel
         genres = genreRepo.Get();
     }
 
-    public void OnPostDelete([FromForm] string? hiddenGenre)
+    public void OnPostDelete([FromForm] string? genre)
     {
-        genreRepo.DeleteSingle(hiddenGenre);
+        genreRepo.DeleteSingle(genre);
         genres = genreRepo.Get();
 
     }
