@@ -20,9 +20,20 @@ public class seriebeheer : PageModel
     {
         Series = serieRepo.Get();
     }
-    public void OnPostDelete([FromForm] string? hiddenSerie)
+    public IActionResult OnGetUpdate([FromForm] int serieId)
     {
-        serieRepo.DeleteSingle(hiddenSerie);
+        if (serieId !=0)
+        {
+            return Redirect("serieUpdate");
+        }
+        else
+        {
+            return Page();
+        }
+    }
+    public void OnPostDelete([FromForm] int serieId)
+    {
+        serieRepo.DeleteSingle(serieId);
         Series = serieRepo.Get();
     }
     
@@ -45,14 +56,6 @@ public class seriebeheer : PageModel
        
     }
     
-    /*public void OnPostUpdate([FromForm] string? serie, [FromForm] int hiddenSerie)
-    {
-        if (hiddenSerie !=0 && serie != null) 
-        {
-            serieRepo.Update(serie,hiddenSerie);
-            genres = serieRepo.Get();
-
-        }
-    }*/
+    
     
 }

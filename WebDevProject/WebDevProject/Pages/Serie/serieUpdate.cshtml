@@ -1,0 +1,58 @@
+@page "{serieId:int}"
+@model WebDevProject.Pages.serieUpdate
+
+@{
+    Layout = "Shared/_Layout";
+}
+<div class="container m-auto">
+@{
+    foreach (var item in @Model.Series)
+    {
+        <div class="row">
+            <div class="col m-auto">
+                <div class="card border-success col-12 m-auto">
+                    <h1 class="p-2">Update serie</h1>
+                    <div class="p-4">
+                        <form method="post" class="d-inline mt-10 border-dark">
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">Serie Titel</label>
+                                <div class="col-sm-10">
+                                    <input type="hidden" value=@item.serieId name="serieId"/>
+                                    <input class="form-control" type="text"  value=@item.serieTitel name="serie" required="required"/>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">Land van oorsprong</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="text" value=@item.land_van_oorsprong name="landvanoorsprong" required="required"/><br/>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">Datum publicatie:</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="datetime-local"  value="@item.eerste_publicatie" name="eerstepublcatie" required="required"/><br/>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-sm-2 col-form-label">Nog lopend? </label>
+                                <div class="col-sm-10">
+                                    @{
+                                        if (item.lopend == 1)
+                                        {
+                                            <input class="form-control" type="text" name="stringlopend" value="Ja" required="required"/>
+                                            <br/>
+                                        }
+                                        <input class="form-control" type="text" name="stringlopend" value="Nee" required="required"/>
+                                        <br/>
+                                    }
+                                </div>
+                            </div>
+                            <div class="p-2"><button asp-page-handler="update" class="btn btn-primary">Update</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+</div>

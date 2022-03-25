@@ -6,7 +6,6 @@
 }
 
 
-
 <div class="container pt-3 pb-5">
     <div class="row">
         <div class="col">
@@ -14,7 +13,7 @@
                 <thead>
                 <tr>
                     <th scope="col">Series Titel</th>
-                    <th scope="col">Land van Oorsprong</th>             
+                    <th scope="col">Land van Oorsprong</th>
                     <th scope="col">Eerste publicatie</th>
                     <th scope="col">Lopend</th>
                     <th scope="col">Delete</th>
@@ -42,16 +41,19 @@
                         }
 
                         <form method="post">
-                            <input type="hidden" name="hiddenSerie" value="@item.serieTitel"/>
-                            <td><button asp-page-handler="delete" class="btn btn-danger">Delete</button></td>
-                            <td><button asp-page-handler="update" class="btn btn-primary">Update</button></td>
+
+                            <input type="hidden" name="serieId" value="@item.serieId"/>
+                            <td>
+                                <button asp-page-handler="delete" class="btn btn-danger">Delete</button>
+                            </td>
                         </form>
+                       <td><a href="/Serie/SerieUpdate/@item.serieId" class="btn btn-primary">update</a></td>
                     </tr>
                 }
                 </tbody>
             </table>
         </div>
-        
+
     </div>
     <div class="div row">
         <div class="col ">
@@ -84,7 +86,9 @@
                                 <input class="form-control" type="text" name="stringlopend" placeholder="is het lopend" required="required"/><br/>
                             </div>
                         </div>
-                        <div class="p-2"><button asp-page-handler="add" class="btn btn-primary">Update</button></div>
+                        <div class="p-2">
+                            <button asp-page-handler="add" class="btn btn-primary">Add</button>
+                        </div>
                     </form>
                 </div>
             </div>

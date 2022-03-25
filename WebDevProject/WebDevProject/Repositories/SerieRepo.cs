@@ -30,14 +30,14 @@ namespace WebDevProject.Repositories
         /// deleting a serie 
         /// </summary>
         /// <param name="serieUitdelist"></param>
-        public void DeleteSingle(string? serieUitdelist)
+        public void DeleteSingle(int serieid)
         {
             //the query
-            string sql = @"DELETE FROM serie WHERE serieTitel = @serieUitdelist";
+            string sql = @"DELETE FROM serie WHERE serieId = @serieid";
             //the connection
             using var connection = GetConnection();
             //executes query
-            connection.Execute(sql, new {serieUitdelist});
+            connection.Execute(sql, new {serieid});
         }
         
         
@@ -77,5 +77,19 @@ namespace WebDevProject.Repositories
                 WHERE serieId=@serieId";
             var removeSeparate = connection.Execute(sql, new {serieId,serie, landVanOorsprong,eerstePublicatie,lopend});
         }
+        
+        
+        public IEnumerable<SerieModel> GetById(int serieId)
+        {
+            string sql = "SELECT * " +
+                         "FROM Serie where serieId=@serieID";
+
+
+            using var connection = GetConnection();
+            //normal query for list
+            var strips = connection.Query<SerieModel>(sql, new {serieId});
+            return strips;
+        }
+
     }
 }
