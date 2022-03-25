@@ -25,5 +25,57 @@ namespace WebDevProject.Repositories
             var strips = connection.Query<SerieModel>(sql);
             return strips;
         }
+        
+        /// <summary>
+        /// deleting a serie 
+        /// </summary>
+        /// <param name="serieUitdelist"></param>
+        public void DeleteSingle(string? serieUitdelist)
+        {
+            //the query
+            string sql = @"DELETE FROM serie WHERE serieTitel = @serieUitdelist";
+            //the connection
+            using var connection = GetConnection();
+            //executes query
+            connection.Execute(sql, new {serieUitdelist});
+        }
+        
+        
+        /// <summary>
+        /// een serie toevoegen 
+        /// </summary>
+        /// <param name="serie"></param>
+        /// <param name="landVanOorsprong"></param>
+        /// <param name="eerstePublicatie"></param>
+        /// <param name="lopend"></param>
+        public void insert(string serie, string landVanOorsprong, DateTime eerstePublicatie, bool lopend)
+        {
+            using var connection = GetConnection();
+            var sql = @"
+                INSERT INTO serie (serieTitel, land_van_oorsprong, eerste_publicatie, lopend) 
+                VALUES (@serie,@landVanOorsprong,@eerstePublicatie,@lopend)";
+            var removeSeparate = connection.Execute(sql, new {serie, landVanOorsprong,eerstePublicatie,lopend});
+        }
+        
+        
+        /// <summary>
+        /// een serie updaten 
+        /// </summary>
+        /// <param name="serieId"></param>
+        /// <param name="serie"></param>
+        /// <param name="landVanOorsprong"></param>
+        /// <param name="eerstePublicatie"></param>
+        /// <param name="lopend"></param>
+        public void Update(int serieId, string serie, string landVanOorsprong, string eerstePublicatie, bool lopend)
+        {
+            using var connection = GetConnection();
+            var sql = @"
+                UPDATE serie SET serieTitel=@serie,
+                land_van_oorsprong=@landVanOorsprong,
+                eerste_publicatie=@eerstePublicatie,
+                lopend=@lopend
+                WHERE serieId=@serieId";
+            var removeSeparate = connection.Execute(sql, new {serieId,serie, landVanOorsprong,eerstePublicatie,lopend});
+        }
     }
 }

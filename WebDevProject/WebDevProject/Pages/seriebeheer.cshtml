@@ -18,6 +18,8 @@
                     <th scope="col">Eerste publicatie</th>
                     <th scope="col">Lopend</th>
                     <th scope="col">Delete</th>
+                    <th scope="col">Update</th>
+
 
                 </tr>
                 </thead>
@@ -27,12 +29,22 @@
                     <tr>
                         <td>@item.serieTitel</td>
                         <td>@item.land_van_oorsprong</td>
-                        <td>@item.eerste_publicatie</td>
-                        <td>@item.lopend</td>
+                        <td>@item.eerste_publicatie.Year-@item.eerste_publicatie.Month-@item.eerste_publicatie.Day</td>
+                        @{
+                            if (item.lopend == 1)
+                            {
+                                <td>Ja</td>
+                            }
+                            else
+                            {
+                                <td>Nee</td>
+                            }
+                        }
 
                         <form method="post">
-                            <input type="hidden" name="hiddenUitgever" value="@item.serieTitel"/>
+                            <input type="hidden" name="hiddenSerie" value="@item.serieTitel"/>
                             <td><button asp-page-handler="delete" class="btn btn-danger">Delete</button></td>
+                            <td><button asp-page-handler="update" class="btn btn-primary">Update</button></td>
                         </form>
                     </tr>
                 }
@@ -40,13 +52,42 @@
             </table>
         </div>
         
-        <div class="col">
-            <form method="post" class="d-inline mt-10" asp-page-handler="add">
-                <h1>Serie toevoegen</h1>
-                <input type="text" asp-for="serie" placeholder="Enter a Serie" required="required"/>
-                <button type="submit" name="add" class="btn btn-primary">Add Serie</button>
-            </form>
-            <div class="row pt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad assumenda dolores dolorum eius, eos eum itaque iure maiores maxime officia quaerat quas quod quos similique, soluta totam ut veritatis, voluptatem.</div> 
+    </div>
+    <div class="div row">
+        <div class="col ">
+            <div class="card border-success col-12">
+                <div class="card-header bg-transparent border-success"> Nieuw Serie Toevoegen</div>
+                <h1 class="p-2">Voeg een serie toe</h1>
+                <div class="p-4">
+                    <form method="post" class="d-inline mt-10 border-dark" asp-page-handler="add">
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label">Serie Titel</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" asp-for="serie" placeholder="Enter a Serie Titel" required="required"/>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label">Land van oorsprong</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" asp-for="landvanoorsprng" placeholder="voeg land van oorsprong toe" required="required"/><br/>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label">Datum publicatie:</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="datetime-local" asp-for="eerstepublicatie" placeholder="voeg eerste publicatie toe" required="required"/><br/>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label">Nog lopend? </label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" name="stringlopend" placeholder="is het lopend" required="required"/><br/>
+                            </div>
+                        </div>
+                        <div class="p-2"><button asp-page-handler="add" class="btn btn-primary">Update</button></div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>

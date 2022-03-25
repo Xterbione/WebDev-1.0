@@ -33,7 +33,7 @@ public class Login : PageModel
                 if (user.wachtwoord == wachtwoord )
                 {
                     var cockie = JsonSerializer.Serialize<GebruikerModel>(user);
-                    HttpContext.Session.SetString("cockie",cockie.ToString());
+                    HttpContext.Session.SetString("cookie",cockie.ToString());
                     Message = "Login Succesful";
                     return new RedirectToPageResult("/Index");
                 }

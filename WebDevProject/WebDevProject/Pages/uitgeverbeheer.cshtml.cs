@@ -14,9 +14,9 @@ public class uitgeverbeheer : PageModel
     {
         uitgevers = uitgeverRepo.Get();
     }
-    public void OnPostDelete([FromForm] string? hiddenUitgever)
+    public void OnPostDelete([FromForm] string? uitgever)
     {
-        uitgeverRepo.DeleteSingle(hiddenUitgever);
+        uitgeverRepo.DeleteSingle(uitgever);
         uitgevers = uitgeverRepo.Get();
 
     }
@@ -26,6 +26,16 @@ public class uitgeverbeheer : PageModel
         {
             uitgeverRepo.insert(uitgever);
             uitgevers = uitgeverRepo.Get();
+        }
+    }
+
+    public void OnPostUpdate([FromForm] string? uitgever, [FromForm] int hiddenuitgever)
+    {
+        if (hiddenuitgever != 0 && uitgever != null)
+        {
+            uitgeverRepo.Update(hiddenuitgever, uitgever);
+            uitgevers = uitgeverRepo.Get();
+
         }
     }
 }

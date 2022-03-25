@@ -18,7 +18,8 @@
                 <tr>
                     <th scope="col">Uitgevers</th>
                     <th scope="col">Delete</th>
-
+                    <th scope="col">Update uitgever</th>
+                    <th scope="col">Update</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -27,8 +28,10 @@
                     <tr>
                         <td>@item.uitgever_naam</td>
                         <form method="post">
-                            <input type="hidden" name="hiddenUitgever" value="@item.uitgever_naam"/>
+                            <input type="hidden" name="hiddenUitgever" value="@item.uitgeverId"/>
                             <td><button asp-page-handler="delete" class="btn btn-danger">Delete</button></td>
+                            <td> <input type="text" name="uitgever" value="@item.uitgever_naam" placeholder="Update uitgever"/></td>
+                            <td><button asp-page-handler="update" class="btn btn-primary">Update</button></td>
                         </form>
                     </tr>
                 }

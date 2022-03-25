@@ -14,9 +14,9 @@ public class creatorbeheer : PageModel
     {
         creators = creatorRepo.Get();
     }
-    public void OnPostDelete([FromForm] string? hiddenCreator)
+    public void OnPostDelete([FromForm] string? creator)
     {
-        creatorRepo.DeleteSingle(hiddenCreator);
+        creatorRepo.DeleteSingle(creator);
         creators = creatorRepo.Get();
     }
     public void OnPostAdd()
@@ -27,4 +27,15 @@ public class creatorbeheer : PageModel
             creators = creatorRepo.Get();
         }
     }
+    
+    public void OnPostUpdate([FromForm] string? creator, [FromForm] int hiddenCreator)
+    {
+        if (hiddenCreator !=0 && creator != null) 
+        {
+            creatorRepo.Update(hiddenCreator,creator);
+            creators = creatorRepo.Get();
+
+        }
+    }
+    
 }
