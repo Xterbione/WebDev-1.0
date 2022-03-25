@@ -28,5 +28,22 @@ public class CreatorRepo
         var strips = connection.Query<CreatorModel>(sql);
         return strips;
     }
+    public void DeleteSingle(string? creatorUitList)
+    {
+        //the query
+        string sql = @"DELETE FROM creator WHERE creator_naam = @creatorUitList";
+        //the connection
+        using var connection = GetConnection();
+        //executes query
+        connection.Execute(sql, new {creatorUitList});
+    }
+    public void insert(string creator)
+    {
+        using var connection = GetConnection();
+        var sql = @"
+                INSERT INTO creator (creator_naam) 
+                VALUES (@creator)";
+        var removeSeparate = connection.Execute(sql, new {creator});
+    }
 
 }

@@ -1,0 +1,201 @@
+﻿@page
+@model WebDevProject.Pages.DrukBeheerModel
+@{
+}
+<div class="container">
+    <h1>Druk Beheer Pagina</h1>
+    @*for user response*@
+    @if (@Model.triggerpoint == 1)
+    {
+        <div class="alert alert-danger" role="alert">
+            isbn bestaat al.
+        </div>
+    }
+    @if (@Model.triggerpoint == 2)
+    {
+        <div class="alert alert-success" role="alert">
+            nieuw stripboek is toegevoegd.
+        </div>
+    }
+    @if (@Model.triggerpoint == 3)
+    {
+        <div class="alert alert-success" role="alert">
+            stripboek is aangepast.
+        </div>
+    }
+    @if (@Model.triggerpoint == 4)
+    {
+        <div class="alert alert-success" role="alert">
+            betrokkene toegevoegd.
+        </div>
+    }
+    @if (@Model.triggerpoint == 5)
+    {
+        <div class="alert alert-success" role="alert">
+            betrokkene verwijderd.
+        </div>
+    }
+    @if (@Model.triggerpoint == 6)
+    {
+        <div class="alert alert-danger" role="alert">
+            betrokkene combinatie bestaat al.
+        </div>
+    }
+    @if (@Model.triggerpoint == 7)
+    {
+        <div class="alert alert-danger" role="alert">
+            druk is verwijderd!
+        </div>
+    }
+</div>
+<div class="container" style="margin-bottom: 100px;">
+    <div style="overflow-x:auto;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>druknummer</td>
+                <td>druk datum</td>
+                <td>uitvoering (taal)</td>
+                <td>oplage</td>
+                <td>waarde</td>
+                <td>isbn nummer</td>
+                <td>stripboek</td>
+                <td>uitgever</td>
+                <td>Update</td>
+                <td>Delete</td>
+                <td>betrokkenen</td>
+                <td>Creator toevoegen</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @Model.drukken)
+            {
+                <tr>
+                    <form method="post">
+                        <input type="hidden" name="edrukid" value="@item.drukId" />
+                    <td><input class="form-control" name="edruknummer" type="number" value="@item.druknummer" required /></td>
+                    <td><input class="form-control" name="edrukdatum" type="datetime" value="@item.druk_datum" required /></td>
+                    <td><input class="form-control" name="euitvoering" type="text" value="@item.uitvoering" required /></td>
+                    <td><input class="form-control" name="eoplage" type="number" value="@item.oplage" required /></td>
+                    <td><input class="form-control" name="ewaarde" type="number" step="0.01" min="0.01" value="@item.waarde" required /></td>
+                    <td><input class="form-control" name="eisbn" type="number" max="999999999999" value="@item.isbn" required /></td>
+                    <td>
+
+                        <select name="estripboekid" class="form-select" aria-label="Default select example" required>
+                                @foreach (var item2 in @Model.stripboeken)
+                                {
+                                    if (item2.StripboekId == item.stripboek_id)
+                                    {
+                                    <option selected value="@item2.StripboekId">@item2.stripboektitel</option>
+                                    }
+                                    else
+                                    {
+                                    <option value="@item2.StripboekId">@item2.stripboektitel</option>
+                                    }
+                                }
+                        </select>
+                    </td>
+                    <td>
+                        <select name="euitgeverid" class="form-select" aria-label="Default select example" required>
+                                @foreach (var item2 in @Model.uitgevers)
+                                {
+                                    if (item2.uitgeverId == item.uitgever_id)
+                                    {
+                                    <option selected value="@item2.uitgeverId">@item2.uitgever_naam</option>
+                                    }
+                                    else
+                                    {
+                                    <option value="@item2.uitgeverId">@item2.uitgever_naam</option>
+                                    }
+                                }
+                        </select>
+                    </td>
+                    <td><button class="btn btn-success">Update</button></td>
+                    </form>
+
+
+                    <td>
+                        <form method="post">
+                             <input asp-for="delete" type="hidden" name="delete" value="@item.drukId" />
+                            <button class="btn-danger btn" type="submit">Delete</button>
+                        </form>
+                    </td>
+                    <td>
+                        @foreach (var item2 in @item.werkenAan)
+                        {
+
+                            <p>@item2.CreatorModel.creator_naam werkt als @item2.rol </p>
+
+                            <form method="post">
+
+                                <input asp-for="dcreatorid" type="hidden" name="dcreatorid" value="@item2.creator_id" />
+                                <input asp-for="ddrukid" type="hidden" name="ddrukid" value="@item.drukId" />
+                                <input asp-for="drol" type="hidden" name="drol" value="@item2.rol" />
+
+                                <button class="btn btn-danger" type="submit">Verwijderen</button>
+                            </form>
+                        }
+                    </td>
+                    <td>
+
+                        <form method="post">
+                            <label for="ncreatorid" class="form-label">creator: </label>
+                            <select asp-for="ncreatorid" id="ncreatorid" name="ncreatorid" class="form-select" aria-label="Default select example" required>
+                                @foreach (var item2 in @Model.creatorModels)
+                                {
+
+                                    <option value="@item2.creatorId">@item2.creator_naam</option>
+
+                                }
+                            </select>
+                            <label for="nrol" class="form-label">rol: </label>
+                            <input asp-for="nrol" name="nrol" id="nrol" class="form-control" type="text" name="nrol" required></input>
+                            <input asp-for="ndrukid" type="hidden" name="ndrukid" value="@item.drukId" /><br>
+                            <button type="submit" class="btn btn-primary">toevoegen</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h1>Nieuwe Druk Toevoegen</h1>
+            <p>vul alle velden naar behoren in. denk aan het format voor het invoeren van datums</p>
+            <form method="post">
+                <label for="idruknummer" class="form-label">druknummer </label>
+                <input class="form-control" id="idruknummer" name="idruknummer" type="number" required />
+                <label for="idrukdatum" class="form-label">druk datum FORMAT: 8/12/1999 12:00:00 AM</label>
+                <input class="form-control" id="idrukdatum" name="idrukdatum" type="datetime" required />
+                <label for="iuitvoering" class="form-label">uitvoering (taal)</label>
+                <input class="form-control" id="iuitvoering" name="iuitvoering" type="text" required />
+                <label for="ioplage" class="form-label">oplage </label>
+                <input class="form-control" id="ioplage" name="ioplage" type="number" required />
+                <label for="iwaarde" class="form-label">waarde in euros</label>
+                <input class="form-control" id="iwaarde" name="iwaarde" type="number" step="0.01" min="0.01" required />
+                <label for="iisbn" class="form-label">isbn nummer </label>
+                <input class="form-control" id="iisbn" name="iisbn" type="number" max="999999999999" required />
+
+                <label for="istripboekid" class="form-label">bijbehorend stripboek selecteren</label>
+                <select name="istripboekid" id="istripboekid" class="form-select" aria-label="Default select example" required>
+                    @foreach (var item2 in @Model.stripboeken)
+                    {
+                        <option value="@item2.StripboekId">@item2.stripboektitel</option>
+                    }
+                </select>
+
+                <label for="iuitgeverid" class="form-label">uitgever selecteren</label>
+                <select name="iuitgeverid" id="iuitgeverid" class="form-select" aria-label="Default select example" required>
+                    @foreach (var item2 in @Model.uitgevers)
+                    {
+                        <option value="@item2.uitgeverId">@item2.uitgever_naam</option>
+
+                    }
+                </select>
+                <br />
+                <button class="btn btn-success">Toevoegen</button>
+            </form>
+        </div>
+    </div>
+</div>

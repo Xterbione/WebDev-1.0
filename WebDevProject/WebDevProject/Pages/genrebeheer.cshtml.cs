@@ -9,6 +9,7 @@ namespace WebDevProject.Pages;
 public class genrebeheer : PageModel
 {
     public IEnumerable<GenreModel> genres { get; set; }
+
     private GenreRepo genreRepo = new GenreRepo();
     [BindProperty(SupportsGet = true)] [Required]  public string genre { get; set; }
 
@@ -17,9 +18,9 @@ public class genrebeheer : PageModel
         genres = genreRepo.Get();
     }
 
-    public void OnPostDelete([FromForm] string? hiddenGenre)
+    public void OnPostDelete([FromForm] string? genre)
     {
-        genreRepo.DeleteSingle(hiddenGenre);
+        genreRepo.DeleteSingle(genre);
         genres = genreRepo.Get();
 
     }
@@ -28,6 +29,15 @@ public class genrebeheer : PageModel
         if (genre!= null)
         {
             genreRepo.insert(genre);
+            genres = genreRepo.Get();
+
+        }
+    }
+    public void OnPostUpdate([FromForm] string? genre, [FromForm] int hiddengenre)
+    {
+        if (hiddengenre !=0 && genre != null) 
+        {
+            genreRepo.Update(hiddengenre,genre);
             genres = genreRepo.Get();
 
         }

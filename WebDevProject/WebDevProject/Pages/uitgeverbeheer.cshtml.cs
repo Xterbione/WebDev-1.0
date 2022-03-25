@@ -9,7 +9,7 @@ public class uitgeverbeheer : PageModel
 {
     public IEnumerable<UitgeverModel> uitgevers { get; set; }
     private UitgeverRepo uitgeverRepo = new UitgeverRepo();
-    [BindProperty(SupportsGet = true)] public string uitgever { get; set; }  public string genre { get; set; }
+    [BindProperty(SupportsGet = true)] public string uitgever { get; set; }  
     public void OnGet()
     {
         uitgevers = uitgeverRepo.Get();

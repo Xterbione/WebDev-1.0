@@ -32,7 +32,7 @@ public class UitgeverRepo
     public void DeleteSingle(string? uitgeverUitList)
     {
         //the query
-        string sql = @"DELETE FROM genre WHERE genre = @uitgeverUitList";
+        string sql = @"DELETE FROM uitgever WHERE uitgever_naam = @uitgeverUitList";
         //the connection
         using var connection = GetConnection();
         //executes query
@@ -42,7 +42,7 @@ public class UitgeverRepo
     {
         using var connection = GetConnection();
         var sql = @"
-                INSERT INTO genre (genre) 
+                INSERT INTO uitgever (uitgever_naam) 
                 VALUES (@uitgever)";
         var removeSeparate = connection.Execute(sql, new {uitgever});
     }
