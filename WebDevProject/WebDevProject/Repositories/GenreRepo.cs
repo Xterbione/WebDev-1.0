@@ -26,7 +26,19 @@ namespace WebDevProject.Repositories
             var strips = connection.Query<GenreModel>(sql);
             return strips;
         }
-        
+
+        /// <summary>
+        /// Gets GenreModel from database
+        /// </summary>
+        /// <param name="genre_id">Selects GenreId in database table</param>
+        /// <returns></returns>
+        public GenreModel Get(int genreId)
+        {
+            string sql = "SELECT * FROM Genre WHERE genreId = @genreId";
+            using var connection = GetConnection();
+            GenreModel genre = connection.QuerySingle<GenreModel>(sql, new {genreId});
+            return genre;
+        }
         
         public void DeleteSingle(string? genreUitDeList)
         {

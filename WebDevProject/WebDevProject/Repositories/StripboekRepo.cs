@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using System.Data;
+using NuGet.Protocol.Plugins;
 using WebDevProject.Models;
 using WebDevProject.Pages;
 
@@ -35,6 +36,19 @@ namespace WebDevProject.Repositories
                     return StripBoekModel;
                 }, splitOn: "SerieId, GenreId");
             return strips;
+        }
+
+        /// <summary>
+        /// Gets stripboekmodel for a strip in the database based on it's stripId
+        /// </summary>
+        /// <param name="stripId"></param>
+        /// <returns></returns>
+        public StripboekModel Get(int stripId)
+        {
+            sql = "SELECT * FROM Stripboek WHERE stripboekId = @stripId";
+            using var connection = GetConnection();
+            StripboekModel strip = connection.QuerySingle<StripboekModel>(sql, new {stripId});
+            return strip;
         }
 
         /// <summary>

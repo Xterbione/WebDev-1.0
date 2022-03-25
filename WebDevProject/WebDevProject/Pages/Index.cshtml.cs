@@ -7,8 +7,8 @@ namespace WebDevProject.Pages;
 
 public class IndexModel : PageModel
 {
-    public IEnumerable<StripboekModel> StripboekModels { get; set; }
     private readonly ILogger<IndexModel> _logger;
+    public IEnumerable<StripboekModel> StripboekModels { get; set; }
     public StripBoekRepo stripboekRepo = new();
 
     public IndexModel(ILogger<IndexModel> logger)
