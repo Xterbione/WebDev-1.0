@@ -32,6 +32,7 @@
                                 <li>@(item3.rol): @item3.CreatorModel.creator_naam</li>
                             }
                         }
+                        
                         @{
                             if (item.StripboekModel.SerieModel.lopend == 1)
                             {
@@ -45,7 +46,7 @@
                         <li>Isbn: @item.isbn</li>
                     </ul>
                     <form method="post">
-                        <button value="@item.stripboek_id" class="btn btn-primary">Bekijk stripboek</button>
+                        <a asp-page="@nameof(Stripboek)" asp-route-stripboekId="@item.stripboek_id" type="submit" class="btn btn-primary">Bekijk stripboek</a>
                     </form>
                     
                 </div>
