@@ -21,7 +21,8 @@
                     <li>volgnummer: @item.volgnummer</li>
                     <li>Aantal pagina's: @item.aantal_paginas</li>
                     <li>Serie: @item.SerieModel.serieTitel</li>
-                    @{ //Laat zien of de serie nog lopend is
+                    @{
+                        //Laat zien of de serie nog lopend is
                         if (item.SerieModel.lopend == 1)
                         {
                             <li>Serie lopend: ja</li>
@@ -33,7 +34,7 @@
                     }
                     <li>Genre: @item.GenreModel.genre</li>
                 </ul>
-                <a href="#" class="btn btn-primary">Bekijk stripboek</a>
+                <a asp-page="@nameof(Stripboek)" asp-route-stripboekId="@item.StripboekId" type="submit" class="btn btn-primary">Bekijk stripboek</a>
             </div>
         </div>
     }

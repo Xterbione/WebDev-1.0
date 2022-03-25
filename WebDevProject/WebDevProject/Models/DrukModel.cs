@@ -11,6 +11,7 @@
         public decimal waarde { get; set; }
         public string isbn { get; set; }
         public int uitgever_id { get; set; }
+        
         public List<WerktAanModel> werkenAan = new ();
 
         public StripboekModel StripboekModel { get; set; }

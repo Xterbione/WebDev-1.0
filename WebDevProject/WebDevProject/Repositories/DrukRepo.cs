@@ -45,6 +45,32 @@ namespace WebDevProject.Repositories
         }
 
         /// <summary>
+        /// Gets DrukModel based on DrukId
+        /// </summary>
+        /// <param name="drukId"></param>
+        /// <returns></returns>
+        public IEnumerable<DrukModel> Get(int stripboek_id)
+        {
+            sql = sql + "WHERE stripboek_id = @stripboek_id";
+            
+            using var connection = GetConnection();
+            //normal query for list
+            IEnumerable<DrukModel> strips = connection
+                .Query<DrukModel, StripboekModel, SerieModel, GenreModel, UitgeverModel
+                    , DrukModel>(sql,
+                    (DrukModel, StripboekModel, SerieModel, GenreModel, UitgeverModel) =>
+                    {
+                        //vul het main object met de aangemaakte objecten
+                        StripboekModel.SerieModel = SerieModel;
+                        StripboekModel.GenreModel = GenreModel;
+                        DrukModel.StripboekModel = StripboekModel;
+                        DrukModel.UitgeverModel = UitgeverModel;
+                        return DrukModel;
+                    }, new {stripboek_id}, splitOn: "stripboekId, serieId, genreId, uitgeverId");
+            return strips;        
+        }
+
+        /// <summary>
         /// Zoekfunctie om te zoeken in de database.
         /// </summary>
         /// <param name="selected">isbn of stripboektitel </param>
