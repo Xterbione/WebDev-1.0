@@ -6,11 +6,13 @@
     <title>Mijn Collectie</title>
 </head>
 <body>
-<div>
+<div class="mb-3">
     <h1>Collectie van @Model.Gebruiker.gebruikersnaam</h1>
 </div>
+<div class="mb-3 align-items-start">
+    <a class="btn btn-primary mb-3" asp-page="@nameof(Toevoegen)" asp-route-gebruikerId="@Model.Gebruiker.GebruikerId">Boek toevoegen</a>
+</div>
 <div class="row d-flex justify-content-around">
-    <a class="btn btn-primary mb-3" asp-page="@nameof(Toevoegen)">Druk toevoegen</a>
     @foreach (string serie in @Model.series)
     {
         <h2 class="mb-3">@serie</h2>
@@ -66,25 +68,6 @@
             </tbody>
         </table>
     }
-    @foreach (var item in @Model.WordtOpgeslagenInCollectieVanModels)
-    {
-        <div class="card col-3 mb-3" style="width: 18rem;">
-            <img src="https://us.123rf.com/450wm/piotrurakau/piotrurakau1707/piotrurakau170700026/82024829-de-grappige-achtergrond-van-de-boekpagina-met-lege-kleurrijke-toespraakbellen-in-pop-artstijl-strale.jpg?ver=6" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title"> @item.DrukModel.StripboekModel.stripboektitel </h5>
-                <p class="card-text">
-                <ul>
-                    <li>druknummer: @item.DrukModel.druknummer</li>
-                    <li>druk datum: @item.DrukModel.druk_datum</li>
-                    <li>oplage: @item.DrukModel.oplage</li>
-                    <li>volgnummer: @item.DrukModel.StripboekModel.volgnummer</li>
-                    <li>Genre: @item.DrukModel.StripboekModel.GenreModel.genre</li>
-                </ul>
-
-
-                <a class="btn btn-primary" asp-page="@nameof(Stripboek)" asp-route-stripboekId="@item.DrukModel.stripboek_id">Bekijk stripboek</a>
-            </div>
-        </div>
     }
 </div>
 </body>

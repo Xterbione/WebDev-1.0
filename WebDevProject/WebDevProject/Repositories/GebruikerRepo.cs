@@ -14,9 +14,7 @@ public class GebruikerRepo
     {
         return new DBUtils().GetDbConnection();
     }
-
-
-
+    
     /// <summary>
     /// gets al Gebruikers in a ienumerable list
     /// </summary>
@@ -56,6 +54,20 @@ public class GebruikerRepo
          var gebruiker = connection.QuerySingle<GebruikerModel>(sql, new { email });
          return gebruiker;
      }
+    
+    /// <summary>
+    /// Gets gebruikerModel from gebruikerId
+    /// </summary>
+    /// <param name="gebruikerId"></param>
+    /// <returns></returns>
+    public GebruikerModel Get(int gebruikerId)
+    {
+        string sql = "SELECT * FROM gebruiker WHERE gebruikerId= @gebruikerId";
+
+        using var connection = GetConnection();
+        var gebruiker = connection.QuerySingle<GebruikerModel>(sql, new { gebruikerId });
+        return gebruiker;
+    }
 
     public int count(string email)
     {
