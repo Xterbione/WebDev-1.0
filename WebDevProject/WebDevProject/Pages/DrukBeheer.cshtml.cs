@@ -13,7 +13,7 @@ namespace WebDevProject.Pages
         [BindProperty]
         public int ddrukid { get; set; }
         [BindProperty]
-        public string drol { get; set; }
+        public string drol { get; set; } // Nice naam
 
         //for adding creators
         [BindProperty]
