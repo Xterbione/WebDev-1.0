@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS
 
 CREATE TABLE Gebruiker
 (
-    gebruikerId   int          NOT NULL AUTO_INCREMENT,
+    gebruikerId    int          NOT NULL AUTO_INCREMENT,
     gebruikersnaam nvarchar(20) NOT NULL,
     geboortedatum  date,
     email          nvarchar(50) NOT NULL,
@@ -22,14 +22,14 @@ CREATE TABLE Gebruiker
 
 CREATE TABLE Uitgever
 (
-    uitgeverId   int AUTO_INCREMENT,
+    uitgeverId    int AUTO_INCREMENT,
     uitgever_naam nvarchar(40) NOT NULL,
     PRIMARY KEY (uitgeverId)
 );
 
 CREATE TABLE Creator
 (
-    creatorId   int          NOT NULL AUTO_INCREMENT,
+    creatorId    int          NOT NULL AUTO_INCREMENT,
     creator_naam nvarchar(40) NOT NULL,
     PRIMARY KEY (creatorId)
 );
@@ -37,14 +37,14 @@ CREATE TABLE Creator
 CREATE TABLE Genre
 (
     genreId int AUTO_INCREMENT,
-    genre    nvarchar(40),
+    genre   nvarchar(40),
     PRIMARY KEY (genreId)
 );
 
 
 CREATE TABLE Serie
 (
-    serieId           int AUTO_INCREMENT NOT NULL,
+    serieId            int AUTO_INCREMENT NOT NULL,
     serieTitel         nvarchar(30)       NOT NULL,
     land_van_oorsprong nvarchar(30)       NOT NULL,
     eerste_publicatie  date               NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE Serie
 
 CREATE TABLE Stripboek
 (
-    stripboekId   int          NOT NULL AUTO_INCREMENT,
+    stripboekId    int          NOT NULL AUTO_INCREMENT,
     stripboektitel nvarchar(40) NOT NULL,
     aantal_paginas int,
     volgnummer     int          NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE Stripboek
 
 CREATE TABLE Druk
 (
-    drukId      int          NOT NULL AUTO_INCREMENT,
+    drukId       int          NOT NULL AUTO_INCREMENT,
     stripboek_id int,
     druknummer   nvarchar(30) NOT NULL,
     druk_datum   date         NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE Druk
     isbn         nvarchar(13),
     uitgever_id  int,
     PRIMARY KEY (drukId),
-    FOREIGN KEY (stripboek_id) REFERENCES Stripboek (stripboekId),
+    FOREIGN KEY (stripboek_id) REFERENCES Stripboek (stripboekId) ON DELETE CASCADE,
     FOREIGN KEY (uitgever_id) REFERENCES Uitgever (uitgeverId)
 );
 
@@ -91,8 +91,8 @@ CREATE TABLE Wordt_opgeslagen_in_collectie_van
     beoordeling     tinyint,
     opslag_locatie  nvarchar(40),
     CONSTRAINT PK_in_collectie PRIMARY KEY (druk_id, gebruiker_id),
-    FOREIGN KEY (druk_id) REFERENCES Druk (drukId),
-    FOREIGN KEY (gebruiker_id) REFERENCES Gebruiker (gebruikerId)
+    FOREIGN KEY (druk_id) REFERENCES Druk (drukId) ON DELETE CASCADE,
+    FOREIGN KEY (gebruiker_id) REFERENCES Gebruiker (gebruikerId) ON DELETE CASCADE
 );
 
 CREATE TABLE Werkt_aan
@@ -101,6 +101,6 @@ CREATE TABLE Werkt_aan
     druk_id    int,
     rol        nvarchar(40) NOT NULL,
     CONSTRAINT PK_Werkt_aan PRIMARY KEY (creator_id, druk_id, rol),
-    FOREIGN KEY (druk_id) REFERENCES Druk (drukId),
-    FOREIGN KEY (creator_id) REFERENCES Creator (creatorId)
+    FOREIGN KEY (druk_id) REFERENCES Druk (drukId) ON DELETE CASCADE,
+    FOREIGN KEY (creator_id) REFERENCES Creator (creatorId) ON DELETE CASCADE
 );
