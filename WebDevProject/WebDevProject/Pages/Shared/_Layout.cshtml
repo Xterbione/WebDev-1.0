@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@*using voor het statemanagement gedeelte*@
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json
+@using WebDevProject.Models
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -21,24 +26,50 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" asp-area="" asp-page="/Index">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" asp-area="" asp-page="/MijnCollectie">Mijn Collectie</a>
-                    </li>
+                    @if (Context.Session.GetString("cockie") != null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-page="/MijnCollectie">Mijn Collectie</a>
+                        </li>
+                    }
                     <li class="nav-item">
                         <a class="nav-link text-white" asp-area="" asp-page="/OverOns">Over Ons</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" asp-area="" asp-page="/Contact">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" asp-area="" asp-page="/Login">Inloggen</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" asp-area="" asp-page="/Register">Registreren</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" asp-area="" asp-page="/beheerpanel">beheerders panel</a>
-                    </li>
+                    @if (Context.Session.GetString("cockie") == null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Login">Inloggen</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Register">Registreren</a>
+                        </li>
+                    }
+                    @if (Context.Session.GetString("cockie") != null)
+                    {
+@*                        @{
+                            hier word de cookie terug gezet naar een object zodat je daar data uit kunt halen
+                            string rawsession = Context.Session.GetString("cockie");
+                            GebruikerModel gebruiker = JsonSerializer.Deserialize<GebruikerModel>(rawsession);
+                        }*@
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-page="/Beheerpanel">Beheerderspaneel</a>
+                        </li>
+
+                        
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Profile">Profiel</a>
+                        </li>
+                        //HttpContext.session.remove("cockie");
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Logout">Logout</a>
+                        </li>
+                    }
+
                 </ul>
                 <form class="d-flex" method="get" action="Zoekresultaten">
                     <select class="form-control" name="option" id="option">
