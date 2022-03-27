@@ -1,4 +1,5 @@
 @page
+@using WebDevProject.Models
 @model WebDevProject.Pages.Collectie.Index
 
 <head>
@@ -9,9 +10,61 @@
     <h1>Collectie van @Model.Gebruiker.gebruikersnaam</h1>
 </div>
 <div class="row d-flex justify-content-around">
-    @foreach (var item in @Model.WordtOpgeslagenInCollectieVanModels)
+    <a class="btn btn-primary mb-3" asp-page="@nameof(Toevoegen)">Druk toevoegen</a>
+    @foreach (string serie in @Model.series)
     {
-        
+        <h2 class="mb-3">@serie</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Titel</th>
+                <th>Druknummer</th>
+                <th>Staat</th>
+                <th>Huidige waarde</th>
+                <th>Aankoopwaarde</th>
+                <th>Aankoop locatie</th>
+                <th>Beoordeling</th>
+                <th>Opslaglocatie</th>
+                <th>Aanpassen</th>
+                <th>Verwijderen</th>
+            </tr>
+            </thead>
+            <tbody>
+            @{
+                foreach (var item2 in Model.WordtOpgeslagenInCollectieVanModels)
+                {
+                    if (item2.DrukModel.StripboekModel.SerieModel.serieTitel == serie)
+                    {
+                        <tr>
+                            <td>@item2.DrukModel.StripboekModel.stripboektitel</td>
+                            <td>@item2.DrukModel.druknummer</td>
+                            <td>@item2.staat</td>
+                            <td>@item2.DrukModel.waarde</td>
+                            <td>@item2.aankoop_waarde</td>
+                            <td>@item2.aankoop_locatie</td>
+                            <td>@item2.beoordeling</td>
+                            <td>@item2.opslag_locatie</td>
+                            <td>
+                                <a class="btn" asp-page="@nameof(Aanpassen)"
+                                   asp-route-gebruikerId="@Model.Gebruiker.GebruikerId"
+                                   asp-route-drukId="@item2.druk_id">
+                                    Aanpassen
+                                </a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" asp-page="@nameof(Verwijderen)"
+                                   asp-route-gebruikerId="@Model.Gebruiker.GebruikerId"
+                                   asp-route-drukId="@item2.druk_id">
+                                    Verwijder
+                                </a>
+                            </td>
+
+                        </tr>
+                    }
+                }
+            }
+            </tbody>
+        </table>
     }
     @foreach (var item in @Model.WordtOpgeslagenInCollectieVanModels)
     {

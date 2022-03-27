@@ -15,8 +15,8 @@ public class Index : PageModel
     
     public GebruikerModel Gebruiker { get; set; }
     public WordtOpgeslagenInCollectieVanModel WordtOpgeslagenInCollectieVanModel { get; set; }
-    
-    
+    public List<string> series = new List<string>();
+
     public IActionResult OnGet()
     {
         if (HttpContext.Session.GetString("cockie") != null)
@@ -25,7 +25,14 @@ public class Index : PageModel
             Gebruiker = JsonConvert.DeserializeObject<GebruikerModel>(sessionstring);
 
             WordtOpgeslagenInCollectieVanModels = WordtOpgeslagenInCollectieRepo.Get(Gebruiker.GebruikerId);
-            
+            foreach (var item in WordtOpgeslagenInCollectieVanModels)
+            {
+                string serie = item.DrukModel.StripboekModel.SerieModel.serieTitel;
+                if (!series.Contains(serie))
+                {
+                    series.Add(serie);
+                }
+            }
             return Page();
         }
         return new RedirectToPageResult("/Login");
