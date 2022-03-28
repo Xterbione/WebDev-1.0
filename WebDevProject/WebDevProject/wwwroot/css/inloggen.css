@@ -56,7 +56,7 @@ html,body{
     background-size: cover;
 }
 
-.global-container{
+.global-container-login{
     height: 100%;
     display: flex;
     align-items: center;
@@ -85,13 +85,13 @@ input[type="password"]{
 }
 input[type="email"]
 {
-    margin-left: 20px;
+    margin-left: 0px;
 }
 input[type="password"]
 {
-    margin-left: -5px;
+    margin-left:0px;
 }
-.card-title
+.card-title-login
 {
     font-weight: 900;
     padding-top: 50px;
@@ -99,7 +99,7 @@ input[type="password"]
 }
 
 
-.card-body{
+.card-body-login{
     display: flex;
     align-items:center;
     flex-direction: column;
@@ -108,17 +108,17 @@ label{
 padding-right: 20px
 }
 
-.btn
+.inlogbutton
 {
     background-color: #bb2d3b;
     font-size: 14px;
     border-radius: 10px;
     width: 150px;
     height: 30px;
-    margin-left: 85px;
+    margin-left: 0px;
     color: white;
 }
-.signup
+.signup-login
 {
     text-align: center;
     padding-top: 45px;
