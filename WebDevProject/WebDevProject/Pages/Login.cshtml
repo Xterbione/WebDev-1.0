@@ -2,7 +2,7 @@
 @model WebDevProject.Pages.Login
 
 @{
-    Layout = null;
+    Layout = "Shared/_Layout";
     ViewData["Title"] = "Inloggen";
 }
 
@@ -10,32 +10,34 @@
 <head>
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>    
 <link asp-append-version="true" href="~/css/inloggen.css" rel="stylesheet"/>
+
+
 </head>
-<body>
-<div class="global-container">
-    <div class="div card login-form">
-        <div class="card-body">
-            <h1 class="card-title text-center">Inloggen</h1>
+<body class="ibody">
+<div class="global-container iglobal-container">
+    <div class="div card login-form ilogin-form">
+        <div class="card-body icard-body">
+            <h1 class="card-title text-center icard-titel">Inloggen</h1>
             <div class="card-text">
-                <form method="post">
+                <form method="post" class="iform">
                     <div class="form-group">
-                        <label >Email</label>
+                        <labe class="ilabel" >Email</labe>
                         <input type="email"
                                asp-for="email"
                                class="form-control form-control-sm"
                                id="email"/>
                     </div>
                     <div class="form-group">
-                        <label>Password</label>
+                        <label class="ilabel">Password</label>
                         <input type="password"
                                asp-for="wachtwoord"
                                class="form-control form-control-sm"
                                id="password"/>
                     </div>
                     <div><p>@Model.Message</p></div>
-                    <button type="submit" class="btn btn-light">Inloggen</button>
-                    <div class="signup">
-                        Geen account? <a href="/Register" >maak er een aan!</a>
+                    <button type="submit" class="btn btn-light ibtn">Inloggen</button>
+                    <div class="isignup">
+                        Geen account? <a href="/Register" class="ia" >maak er een aan!</a>
                     </div>
                     
                 </form>

@@ -1,5 +1,4 @@
-
-html,body{
+.ibody{
     height: 100%;
     background-color: #222d32;
     font-family: "Roboto", sans-serif;
@@ -10,19 +9,20 @@ html,body{
     background-size: cover;
 }
 
-.global-container{
+.iglobal-container{
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
 }
-form{
+.iform{
     padding-top: 10px;
     font-size: 14px;
     margin-top: 30px;
+
 }
-.login-form{
+.ilogin-form{
     width: 380px;
     height: 450px;
     margin: 20px;
@@ -30,45 +30,39 @@ form{
     border-radius: 10px!important;
 }
 
-input{
+#password,#email, #name,#geboortedatum{
     background-color: white;
     border:2px solid white;
     border-radius: 10px;
     margin-bottom: 25px;
 }
-input[type="text"]
+.iemail
 {
     margin-left: 20px;
 }
-input[type="email"]
+
+#password
 {
-    margin-left: 20px;
+    margin-left: -5px;
 }
-input[type="password"]
-{
- margin-left: -5px;   
-}
-input[type="datetime-local"]
-{
-    margin-left: 5px;
-}
-.card-title
+.icard-title
 {
     font-weight: 900;
     padding-top: 50px;
     color: #bb2d3b;
 }
 
-.card-body{
+
+.icard-body{
     display: flex;
     align-items:center;
     flex-direction: column;
 }
-label{
+.ilabel{
     padding-right: 20px
 }
 
-.btn
+.ibtn
 {
     background-color: #bb2d3b;
     font-size: 14px;
@@ -79,6 +73,6 @@ label{
     color: white;
 }
 
-a{
+.ia{
     color: #bb2d3b;
 }
