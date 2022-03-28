@@ -44,7 +44,7 @@ namespace WebDevProject.Pages
         public IEnumerable<StripboekModel> strips { get; set; }
         public IEnumerable<GenreModel> genres { get; set; }
         public IEnumerable<SerieModel> series { get; set; }
-        StripBoekRepo sprepo = new StripBoekRepo();
+        StripboekRepo sprepo = new StripboekRepo();
         GenreRepo grepo = new GenreRepo();
         SerieRepo serieRepo = new SerieRepo();
         public IActionResult OnGet()

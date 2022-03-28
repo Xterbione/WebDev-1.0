@@ -47,4 +47,24 @@ public class WordtOpgeslagenInCollectieRepo
         return strips;
     }
 
+    public void Add(WordtOpgeslagenInCollectieVanModel nieuwBoek)
+    {
+        var connection = GetConnection();
+        string sql = @"INSERT INTO Wordt_opgeslagen_in_collectie_van(druk_id, gebruiker_id, staat, aankoop_waarde, aankoop_locatie, beoordeling, opslag_locatie)
+                       VALUES (@nieuwBoek.druk_id, @nieuwBoek.gebruiker_id, @nieuwBoek.staat, @nieuwBoek.aankoop_waarde, @nieuwBoek.aankoop_locatie, @nieuwBoek.beoordeling, @nieuwBoek.opslag_locatie)";
+        var excute = connection.Execute(sql, new {nieuwBoek});
+    }
+
+    /// <summary>
+    /// Inserts new boek in collectie van gebruiker
+    /// </summary>
+    /// <param name="nieuwBoek"></param>
+//     public WordtOpgeslagenInCollectieVanModel Insert(WordtOpgeslagenInCollectieVanModel nieuwBoek)
+//     {
+//         using var connection = GetConnection();
+//         var sql = @"INSERT INTO Wordt_opgeslagen_in_collectie_van (druk_id, gebruiker_id, staat, aankoop_waarde, aankoop_locatie, beoordeling, opslag_locatie)
+//                     VALUES (@nieuwBoek.druk_id, @nieuwBoek.gebruiker_id, @nieuwBoek.staat, @nieuwBoek.aankoop_waarde, @nieuwBoek.aankoop_locatie, @nieuwBoek.beoordeling, @nieuwBoek.opslag_locatie );";
+//         var removeSeparate = connection.Execute(sql, new {nieuwBoek});
+//         return nieuwBoek;
+//     }
 }
