@@ -5,13 +5,13 @@ using WebDevProject.Repositories;
 
 namespace WebDevProject.Pages;
 
-public class IndexModel : PageModel
+public class Index : PageModel
 {
-    private readonly ILogger<IndexModel> _logger;
+    private readonly ILogger<Index> _logger;
     public IEnumerable<StripboekModel> StripboekModels { get; set; }
     public StripBoekRepo stripboekRepo = new();
 
-    public IndexModel(ILogger<IndexModel> logger)
+    public Index(ILogger<Index> logger)
     {
         _logger = logger;
     }

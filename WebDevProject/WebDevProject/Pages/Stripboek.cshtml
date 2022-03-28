@@ -38,30 +38,38 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        <h3 class="text-center mb-3">Drukken</h3>
-        @foreach (var druk in Model.Drukken)
-        {
-            <div class="card col-3 mb-3" style="width: 18rem;">
-                <img src="https://us.123rf.com/450wm/piotrurakau/piotrurakau1707/piotrurakau170700026/82024829-de-grappige-achtergrond-van-de-boekpagina-met-lege-kleurrijke-toespraakbellen-in-pop-artstijl-strale.jpg?ver=6" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Druknummer: @druk.druknummer </h5>
-                    <p class="card-text">
-                    <ul>
-                        <li>Druk datum: @druk.druk_datum.Day-@druk.druk_datum.Month-@druk.druk_datum.Year</li>
-                        <li>Oplage: @druk.oplage</li>
-                        <li>Waarde: @druk.waarde</li>
-                        <li>@druk.</li>
-                        @{
-                            foreach (var item3 in druk.werkenAan)
-                            {
-                                <li>@(item3.rol): @item3.CreatorModel.creator_naam</li>
-                            }
-                        }
-                        <li>Isbn: @druk.isbn</li>
-                    </ul>
-                </div>
-            </div>
-
+        @{
+            if (Model.Drukken.Count() == 0)
+            {
+                <h3 class="alert-danger">Dit stripboek heeft nog geen druk informatie</h3>
+            }
+            else
+            {
+                <h3 class="text-center mb-3">Drukken</h3>
+                @foreach (var druk in Model.Drukken)
+                {
+                    <div class="card col-3 mb-3" style="width: 18rem;">
+                        <img src="https://us.123rf.com/450wm/piotrurakau/piotrurakau1707/piotrurakau170700026/82024829-de-grappige-achtergrond-van-de-boekpagina-met-lege-kleurrijke-toespraakbellen-in-pop-artstijl-strale.jpg?ver=6" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Druknummer: @druk.druknummer </h5>
+                            <p class="card-text">
+                            <ul>
+                                <li>Druk datum: @druk.druk_datum.Day-@druk.druk_datum.Month-@druk.druk_datum.Year</li>
+                                <li>Oplage: @druk.oplage</li>
+                                <li>Waarde: @druk.waarde</li>
+                                <li>@druk.</li>
+                                @{
+                                    foreach (var item3 in druk.werkenAan)
+                                    {
+                                        <li>@(item3.rol): @item3.CreatorModel.creator_naam</li>
+                                    }
+                                }
+                                <li>Isbn: @druk.isbn</li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+            }
         }
     </div>
 </div>

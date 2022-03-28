@@ -4,120 +4,122 @@
 }
 <div class="container" style="margin-bottom: 60px;">
     <h1>Stripboek Beheer</h1>
-<div style="overflow-x:auto;">
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">genre</th>
-            <th scope="col">(selecteren)</th>
-            <th scope="col">stripboek titel</th>
-            <th scope="col">volgnummer</th>
-            <th scope="col">aantal paginas</th>
-            <th scope="col">(selecteer serie)</th>
-            <th scope="col">serie titel</th>
-            <th scope="col">land van oorsprong</th>
-            <th scope="col">oorspronkelijke taal</th>
-            <th scope="col">bedenker</th>
-            <th scope="col">status</th>
-            <th>update</th>
-            <th>delete</th>
-        </tr>
-    </thead>
-    <tbody>
+    <div style="overflow-x:auto;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">genre</th>
+                    <th scope="col">stripboek titel</th>
+                    <th scope="col">volgnummer</th>
+                    <th scope="col">aantal paginas</th>
+                    <th scope="col">serie titel</th>
+                    <th scope="col">land van oorsprong</th>
+                    <th>update</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+            <tbody>
 
-        @foreach (var item in @Model.strips)
-        {
-            <tr>
-                <form method="get">
-                    <input type="hidden" name="updateid" value="@item.StripboekId" />
-                <td>
-                        @item.GenreModel.genre
-                </td>
-                <td>
-                    <select class="form-select" name="ucat" id="cat">
-                        <option selected hidden value="@item.genre_id"> select category </option>
-                            @foreach (var item2 in @Model.genres)
-                            {
-                            <option value="@item2.genreId">@item2.genre</option>
-                            }
-                    </select>
-                </td>
-                <td><input type="text" name="ustitel" class="form-control" value="@item.stripboektitel" /></td>
-                <td><input type="number" name="uvolgnummer" class="form-control" value="@item.volgnummer" /></td>
-                <td><input type="number" class="form-control" name="uaantalpaginas" value="@item.aantal_paginas" /></td>
-                <td>
-                    <select class="form-select" name="userie" id="cat">
-                        <option selected hidden value="@item.serie_id"> select category </option>
-                            @foreach (var item2 in @Model.series)
-                            {
-                            <option value="@item2.serieId">@item2.serieTitel</option>
-                            }
-
-                    </select>
-                </td>
-                <td>@item.SerieModel.serieTitel</td>
-                <td>@item.SerieModel.land_van_oorsprong</td>
-                <td>oorsprongkelijke taal(staat niet in db)</td>
-                <td>bedenker(staat niet in db)</td>
-                <td>status(staat niet in db)</td>
-
-                <td><button type="submit" class="btn btn-primary">Update</button></td>
-                </form>
-                <form method="get">
-                <td><button type="submit" name="delete" value="@item.StripboekId" class="btn btn-danger">Delete</button></td>
-                </form>
-            </tr>
-        }
-    </tbody>
-</table>
-</div>
-<form method="get">
-    <div class="card border-success col-12" style="">
-        <div class="card-header bg-transparent border-success">Nieuw Boek Toevoegen</div>
-        <div class="card-body text-success">
-            <h5 class="card-title">een nieuw boek toevoegen aan de applicatie</h5>
-            <label for="ncat" class="form-label">select category</label>
-            <select class="form-select" name="ncat" id="ncat" required>
-                <option selected hidden value="genre_id"> select category </option>
-                @foreach (var item2 in @Model.genres)
+                @foreach (var item in @Model.strips)
                 {
-                    <option value="@item2.genreId">@item2.genre</option>
-                }
-            </select>
-            <label for="ntitel" class="form-label">Titel</label>
-            <div class="invalid-feedback">
-                alle velden moeten ingevuld zijn
-            </div>
-            <input type="text" id="ntitel" name="nstitel" class="form-control" value="" required />
-            <label for="nvolgnummer" class="form-label">volgnummer</label>
-            <div class="invalid-feedback">
-                alle velden moeten ingevuld zijn
-            </div>
-            <input type="number" id="nvolgnummer" name="nvolgnummer" class="form-control" value="volgnummer" required />
-            <label for="naantalpaginas" class="form-label">Aantal paginas</label>
-            <div class="invalid-feedback">
-                alle velden moeten ingevuld zijn
-            </div>
-            <input type="number" id="naantalpaginas" class="form-control" name="naantalpaginas" value="aantal_paginas" required />
-            <label for="nserie" class="form-label">selecteer serie</label>
-            <div class="invalid-feedback">
-                alle velden moeten ingevuld zijn
-            </div>
-            <select class="form-select" name="nserie" id="cat" required>
-                <option selected hidden value="serie_id"> select category </option>
-                @foreach (var item2 in @Model.series)
-                {
-                    <option value="@item2.serieId">@item2.serieTitel</option>
-                }
+                    <tr>
+                        <form method="get">
+                            <input type="hidden" name="updateid" value="@item.StripboekId" />
+                        <td>
+                            <select class="form-select" name="ucat" id="cat">
+                                    @foreach (var item2 in @Model.genres)
+                                    {
+                                        if (item.genre_id == item2.genreId)
+                                        {
+                                        <option selected value="@item2.genreId">@item2.genre</option>
+                                        }
+                                        else
+                                        {
+                                        <option value="@item2.genreId">@item2.genre</option>
+                                        }
 
-            </select>
-            <div class="invalid-feedback">
-                alle velden moeten ingevuld zijn
-            </div>
-            <br />
-            <button type="submit" class="btn btn-primary">Toevoegen</button>
-        </div>
-        <div class="card-footer bg-transparent border-success">By Bryan</div>
+                                    }
+                            </select>
+                        </td>
+                        <td><input type="text" name="ustitel" class="form-control" value="@item.stripboektitel" /></td>
+                        <td><input type="number" name="uvolgnummer" class="form-control" value="@item.volgnummer" /></td>
+                        <td><input type="number" class="form-control" name="uaantalpaginas" value="@item.aantal_paginas" /></td>
+                        <td>
+                            <select class="form-select" name="userie" id="cat">
+                                    @foreach (var item2 in @Model.series)
+                                    {
+                                        if (item.serie_id == item2.serieId)
+                                        {
+                                            <option selected value="@item2.serieId">@item2.serieTitel</option>
+                                        } 
+                                        else
+                                        {
+                                            <option value="@item2.serieId">@item2.serieTitel</option>
+                                        }
+                                        
+                                    }
+
+                            </select>
+                        </td>
+                        <td>@item.SerieModel.land_van_oorsprong</td>
+
+                        <td><button type="submit" class="btn btn-primary">Update</button></td>
+                        </form>
+                        <form method="get">
+                        <td><button type="submit" name="delete" value="@item.StripboekId" class="btn btn-danger">Delete</button></td>
+                        </form>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-</form>
+    <form method="get">
+        <div class="card border-success col-12" style="">
+            <div class="card-header bg-transparent border-success">Nieuw Boek Toevoegen</div>
+            <div class="card-body text-success">
+                <h5 class="card-title">een nieuw boek toevoegen aan de applicatie</h5>
+                <label for="ncat" class="form-label">select category</label>
+                <select class="form-select" name="ncat" id="ncat" required>
+                    <option selected hidden value="genre_id"> select category </option>
+                    @foreach (var item2 in @Model.genres)
+                    {
+                        <option value="@item2.genreId">@item2.genre</option>
+                    }
+                </select>
+                <label for="ntitel" class="form-label">Titel</label>
+                <div class="invalid-feedback">
+                    alle velden moeten ingevuld zijn
+                </div>
+                <input type="text" id="ntitel" name="nstitel" class="form-control" value="" required />
+                <label for="nvolgnummer" class="form-label">volgnummer</label>
+                <div class="invalid-feedback">
+                    alle velden moeten ingevuld zijn
+                </div>
+                <input type="number" id="nvolgnummer" name="nvolgnummer" class="form-control" value="volgnummer" required />
+                <label for="naantalpaginas" class="form-label">Aantal paginas</label>
+                <div class="invalid-feedback">
+                    alle velden moeten ingevuld zijn
+                </div>
+                <input type="number" id="naantalpaginas" class="form-control" name="naantalpaginas" value="aantal_paginas" required />
+                <label for="nserie" class="form-label">selecteer serie</label>
+                <div class="invalid-feedback">
+                    alle velden moeten ingevuld zijn
+                </div>
+                <select class="form-select" name="nserie" id="cat" required>
+                    <option selected hidden value="serie_id"> select category </option>
+                    @foreach (var item2 in @Model.series)
+                    {
+                        <option value="@item2.serieId">@item2.serieTitel</option>
+                    }
+
+                </select>
+                <div class="invalid-feedback">
+                    alle velden moeten ingevuld zijn
+                </div>
+                <br />
+                <button type="submit" class="btn btn-primary">Toevoegen</button>
+            </div>
+            <div class="card-footer bg-transparent border-success">By Bryan</div>
+        </div>
+    </form>
 </div>
