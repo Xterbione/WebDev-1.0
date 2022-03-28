@@ -47,12 +47,22 @@ public class WordtOpgeslagenInCollectieRepo
         return strips;
     }
 
-    public void Add(WordtOpgeslagenInCollectieVanModel nieuwBoek)
+    /// <summary>
+    /// gebruiker_id wordt niet goed opgenomen.
+    /// </summary>
+    /// <param name="druk_id"></param>
+    /// <param name="gebruiker_id">Deze wordt niet opgenomen</param>
+    /// <param name="staat"></param>
+    /// <param name="aankoop_waarde"></param>
+    /// <param name="aankoop_locatie"></param>
+    /// <param name="beoordeling"></param>
+    /// <param name="opslag_locatie"></param>
+    public void Add(int druk_id, int gebruiker_id, string staat, double aankoop_waarde, string aankoop_locatie, int beoordeling, string opslag_locatie)
     {
         var connection = GetConnection();
         string sql = @"INSERT INTO Wordt_opgeslagen_in_collectie_van(druk_id, gebruiker_id, staat, aankoop_waarde, aankoop_locatie, beoordeling, opslag_locatie)
-                       VALUES (@nieuwBoek.druk_id, @nieuwBoek.gebruiker_id, @nieuwBoek.staat, @nieuwBoek.aankoop_waarde, @nieuwBoek.aankoop_locatie, @nieuwBoek.beoordeling, @nieuwBoek.opslag_locatie)";
-        var excute = connection.Execute(sql, new {nieuwBoek});
+                       VALUES (@druk_id, @gebruiker_id, @staat, @aankoop_waarde, @aankoop_locatie, @beoordeling, @opslag_locatie)";
+        var excute = connection.Execute(sql, new {druk_id, gebruiker_id, staat, aankoop_waarde, aankoop_locatie, beoordeling, opslag_locatie});
     }
 
     /// <summary>

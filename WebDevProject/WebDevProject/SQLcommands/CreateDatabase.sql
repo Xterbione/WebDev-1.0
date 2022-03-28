@@ -61,7 +61,7 @@ CREATE TABLE Stripboek
     volgnummer     int          NOT NULL,
     genre_id       int,
     serie_id       int,
-    imageUrl       varchar(500),
+    imageUrl       nvarchar(5000),
     PRIMARY KEY (stripboekId),
     FOREIGN KEY (genre_id) REFERENCES Genre (GenreId),
     FOREIGN KEY (serie_id) REFERENCES Serie (serieId)
@@ -108,9 +108,9 @@ CREATE TABLE Werkt_aan
 );
 
 INSERT INTO serie(serieTitel, land_van_oorsprong, eerste_publicatie, lopend)
-VALUES ('Batman', 'USA', '1901-01-12', true),
-       ('Suske en Wiske', 'Nederland', '1901-01-12', false),
-       ('Kuifje', 'België', '1901-01-12', true),
+VALUES ('Sneeuwwitje', 'USA', '1901-01-12', true),
+       ('Suske en Wiske', 'Nederland', '1901-01-12', true),
+       ('Batman', 'USA', '1901-01-12', false),
        ('Wildstorm', 'USA', '1901-01-12', true);
 
 INSERT INTO Genre(genre)
@@ -133,12 +133,12 @@ VALUES ('John Doe'),
        ('Sven Imholz'),
        ('Stan Lee');
 
-INSERT INTO Stripboek (stripboektitel, aantal_paginas, volgnummer, serie_id, genre_id)
-VALUES ('Sneeuwwitje en de zeven dwergen', 56, 1, 1, 1),
-       ('Sneeuwwitje en de zes dwergen', 86, 2, 1, 1),
-       ('Sneeuwwitje en de vijf dwergen', 65, 3, 1, 1),
-       ('Sneeuwwitje en waar zijn de dwergen?', 156, 4, 1, 1),
-       ('A man or a Bat?', 45, 1, 2, 2);
+INSERT INTO Stripboek (stripboektitel, aantal_paginas, volgnummer, serie_id, genre_id, imageUrl)
+VALUES ('Sneeuwwitje en de zeven dwergen', 56, 1, 1, 1, 'jetbrains://rd/navigate/reference?project=WebDevProject&path=~/Documents/School/HBO-ICT/Module 3/WebDev_Project/Stripboek covers/PNG-afbeelding 1_compressed.png'),
+       ('Sneeuwwitje en de zes dwergen', 86, 2, 1, 1, 'jetbrains://rd/navigate/reference?project=WebDevProject&path=~/Documents/School/HBO-ICT/Module 3/WebDev_Project/Stripboek covers/PNG-afbeelding 3_compressed.png'),
+       ('Sneeuwwitje en de vijf dwergen', 65, 3, 1, 1, 'jetbrains://rd/navigate/reference?project=WebDevProject&path=~/Documents/School/HBO-ICT/Module 3/WebDev_Project/Stripboek covers/PNG-afbeelding 5_compressed.png'),
+       ('Sneeuwwitje en waar zijn de dwergen?', 156, 4, 1, 1, 'jetbrains://rd/navigate/reference?project=WebDevProject&path=~/Documents/School/HBO-ICT/Module 3/WebDev_Project/Stripboek covers/PNG-afbeelding 7_compressed.png'),
+       ('A man or a Bat?', 45, 1, 2, 2, 'jetbrains://rd/navigate/reference?project=WebDevProject&path=~/Documents/School/HBO-ICT/Module 3/WebDev_Project/Stripboek covers/PNG-afbeelding 9_compressed.png');
 
 INSERT INTO Druk(druknummer, druk_datum, uitvoering, oplage, waarde, isbn, stripboek_id, uitgever_id)
 VALUES (1, '1993-08-12', 'Nederlands', 3500, 12.89, '9783161484100', 1, 1),

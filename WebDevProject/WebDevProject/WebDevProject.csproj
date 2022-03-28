@@ -15,6 +15,36 @@
     <ItemGroup>
       <Content Remove="wwwroot\Layouts\**" />
       <Content Remove="Pages\testpage.cshtml" />
+      <Content Include="..\..\..\..\Stripboek covers\PNG-afbeelding 10_compressed.png">
+        <Link>wwwroot\images\PNG-afbeelding 10_compressed.png</Link>
+      </Content>
+      <Content Include="..\..\..\..\Stripboek covers\PNG-afbeelding 1_compressed.png">
+        <Link>wwwroot\images\PNG-afbeelding 1_compressed.png</Link>
+      </Content>
+      <Content Include="..\..\..\..\Stripboek covers\PNG-afbeelding 2_compressed.png">
+        <Link>wwwroot\images\PNG-afbeelding 2_compressed.png</Link>
+      </Content>
+      <Content Include="..\..\..\..\Stripboek covers\PNG-afbeelding 3_compressed.png">
+        <Link>wwwroot\images\PNG-afbeelding 3_compressed.png</Link>
+      </Content>
+      <Content Include="..\..\..\..\Stripboek covers\PNG-afbeelding 4_compressed.png">
+        <Link>wwwroot\images\PNG-afbeelding 4_compressed.png</Link>
+      </Content>
+      <Content Include="..\..\..\..\Stripboek covers\PNG-afbeelding 5_compressed.png">
+        <Link>wwwroot\images\PNG-afbeelding 5_compressed.png</Link>
+      </Content>
+      <Content Include="..\..\..\..\Stripboek covers\PNG-afbeelding 6_compressed.png">
+        <Link>wwwroot\images\PNG-afbeelding 6_compressed.png</Link>
+      </Content>
+      <Content Include="..\..\..\..\Stripboek covers\PNG-afbeelding 7_compressed.png">
+        <Link>wwwroot\images\PNG-afbeelding 7_compressed.png</Link>
+      </Content>
+      <Content Include="..\..\..\..\Stripboek covers\PNG-afbeelding 8_compressed.png">
+        <Link>wwwroot\images\PNG-afbeelding 8_compressed.png</Link>
+      </Content>
+      <Content Include="..\..\..\..\Stripboek covers\PNG-afbeelding 9_compressed.png">
+        <Link>wwwroot\images\PNG-afbeelding 9_compressed.png</Link>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
