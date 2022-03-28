@@ -131,9 +131,18 @@ namespace WebDevProject.Pages
             OnAll();
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            OnAll();
+            if (HttpContext.Session.GetString("cockie") == null)
+            {
+                return new RedirectToPageResult("/Index");
+
+            }
+            else
+            {
+                OnAll();
+            }
+            return Page();
         }
 
         public void OnAll()

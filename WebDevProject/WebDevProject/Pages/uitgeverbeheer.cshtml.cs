@@ -10,9 +10,18 @@ public class uitgeverbeheer : PageModel
     public IEnumerable<UitgeverModel> uitgevers { get; set; }
     private UitgeverRepo uitgeverRepo = new UitgeverRepo();
     [BindProperty(SupportsGet = true)] public string uitgever { get; set; }  
-    public void OnGet()
+    public IActionResult OnGet()
     {
-        uitgevers = uitgeverRepo.Get();
+        if (HttpContext.Session.GetString("cockie") == null)
+        {
+            return new RedirectToPageResult("/Index");
+
+        }
+       
+        else {
+            uitgevers = uitgeverRepo.Get();
+        }
+        return Page();
     }
     public void OnPostDelete([FromForm] string? hiddenUitgever)
     {

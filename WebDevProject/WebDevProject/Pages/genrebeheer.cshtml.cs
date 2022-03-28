@@ -13,9 +13,18 @@ public class genrebeheer : PageModel
     private GenreRepo genreRepo = new GenreRepo();
     [BindProperty(SupportsGet = true)] [Required]  public string genre { get; set; }
 
-    public void OnGet()
+    public IActionResult OnGet()
     {
-        genres = genreRepo.Get();
+        if (HttpContext.Session.GetString("cockie") == null)
+        {
+            return new RedirectToPageResult("/Index");
+
+        }
+        else
+        {
+            genres = genreRepo.Get();
+        }
+        return Page();
     }
 
     public void OnPostDelete([FromForm] string? genre)

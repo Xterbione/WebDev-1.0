@@ -9,10 +9,23 @@ public class seriebeheer : PageModel
 {
     public IEnumerable<SerieModel> Series { get; set; }
     private SerieRepo serieRepo = new SerieRepo();
-    [BindProperty(SupportsGet = true)] public string serie { get; set; }  
-    public void OnGet()
+    [BindProperty(SupportsGet = true)] public string serie { get; set; }
+    public IActionResult OnGet()
     {
-        Series = serieRepo.Get();
+
+        if (HttpContext.Session.GetString("cockie") == null)
+        {
+            return new RedirectToPageResult("/Index");
+           
+        }
+        
+        // return new RedirectToPageResult("/Index");
+        else
+        { 
+            Series = serieRepo.Get();
+            
+        }
+        return Page();
     }
     
 }

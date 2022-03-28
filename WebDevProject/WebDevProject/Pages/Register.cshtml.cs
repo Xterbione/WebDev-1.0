@@ -20,9 +20,14 @@ public class Register : PageModel
 
     public string Message { get; set; }
 
-    public void OnGet()
+    public IActionResult OnGet()
     {
-        
+        if (HttpContext.Session.GetString("cockie") != null)
+        {
+            return new RedirectToPageResult("/Index");
+
+        }
+        return Page();
     }
 
     public void OnPost()

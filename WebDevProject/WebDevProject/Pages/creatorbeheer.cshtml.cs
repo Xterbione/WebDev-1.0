@@ -10,9 +10,18 @@ public class creatorbeheer : PageModel
     public IEnumerable<CreatorModel> creators { get; set; }
     private CreatorRepo creatorRepo = new CreatorRepo();
     [BindProperty(SupportsGet = true)] public string creator { get; set; }  
-    public void OnGet()
+    public IActionResult OnGet()
     {
-        creators = creatorRepo.Get();
+        if (HttpContext.Session.GetString("cockie") == null)
+        {
+            return new RedirectToPageResult("/Index");
+
+        }
+        else
+        {
+            creators = creatorRepo.Get();
+        }
+        return Page();
     }
     public void OnPostDelete([FromForm] string? hiddenCreator)
     {
