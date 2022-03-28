@@ -46,16 +46,29 @@ public class WordtOpgeslagenInCollectieRepo
                     }, new {gebruikerId}, splitOn: "drukId, stripboekId, uitgeverId, serieId, genreId");
         return strips;
     }
+    
+    public WordtOpgeslagenInCollectieVanModel Add(WordtOpgeslagenInCollectieVanModel nieuwBoek)
+    {
+        string sql = @"
+                INSERT INTO Wordt_opgeslagen_in_collectie_van (druk_id, gebruiker_id, staat, aankoop_waarde, aankoop_locatie, beoordeling, opslag_locatie) 
+                VALUES (@druk_id, @gebruiker_id, @staat, @aankoop_waarde, @aankoop_locatie, @beoordeling, @opslag_locatie); 
+                SELECT * FROM Wordt_opgeslagen_in_collectie_van WHERE druk_id = LAST_INSERT_ID() AND gebruiker_id = LAST_INSERT_ID()";
+            
+        using var connection = GetConnection();
+        var addedProduct = connection.QuerySingle<Product>(sql, product);
+        return addedProduct;
+    }
 
     /// <summary>
     /// Inserts new boek in collectie van gebruiker
     /// </summary>
     /// <param name="nieuwBoek"></param>
-    public void Insert(WordtOpgeslagenInCollectieVanModel nieuwBoek)
+    public WordtOpgeslagenInCollectieVanModel Insert(WordtOpgeslagenInCollectieVanModel nieuwBoek)
     {
         using var connection = GetConnection();
         var sql = @"INSERT INTO Wordt_opgeslagen_in_collectie_van (druk_id, gebruiker_id, staat, aankoop_waarde, aankoop_locatie, beoordeling, opslag_locatie)
                     VALUES (@nieuwBoek.druk_id, @nieuwBoek.gebruiker_id, @nieuwBoek.staat, @nieuwBoek.aankoop_waarde, @nieuwBoek.aankoop_locatie, @nieuwBoek.beoordeling, @nieuwBoek.opslag_locatie );";
         var removeSeparate = connection.Execute(sql, new {nieuwBoek});
+        return nieuwBoek;
     }
 }

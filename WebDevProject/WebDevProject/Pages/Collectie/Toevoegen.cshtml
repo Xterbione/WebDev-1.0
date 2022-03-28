@@ -6,7 +6,35 @@
 </head>
 <body>
 <div>
-    <h1>CollectieBeheer</h1>
-    
+    <h1>Boek aan collectie toevoegen</h1>
+</div>
+<span class="alert-danger">@Model.erromessage</span>
+<div>
+    <form method="post">
+        <label class="form-label mb-1">Druk</label>
+        <select class="form-select mb-3" asp-for="NieuwBoek.druk_id" asp-items="@Model.Drukken"></select>
+        <label class="form-label mb-1" asp-for="NieuwBoek.staat"></label>
+        <div class="input-group mb-3">
+            <input class="form-control" type="text" asp-for="NieuwBoek.staat"/>
+        </div>
+        <label class="form-label mb-1" asp-for="NieuwBoek.aankoop_locatie"></label>
+        <div class="input-group mb-3">
+            <input class="form-control" type="text" asp-for="NieuwBoek.aankoop_locatie"/>
+        </div>
+        <label class="form-label mb-1" asp-for="NieuwBoek.beoordeling"></label>
+        <div class="input-group mb-3">
+            <input class="form-control" type="number" asp-for="NieuwBoek.beoordeling"/>
+        </div>
+        <label class="form-label mb-1" asp-for="NieuwBoek.aankoop_waarde"></label>
+        <div class="input-group mb-3">
+            <input class="form-control" type="number" asp-for="NieuwBoek.aankoop_waarde"/>
+        </div>
+        <label class="form-label mb-1" asp-for="NieuwBoek.aankoop_waarde"></label>
+        <div class="input-group mb-3">
+            <input class="form-range" min="1" max="5" step="1" type="range" asp-for="NieuwBoek.aankoop_waarde"/>
+        </div>
+        <button class="btn btn-primary" type="submit">Toevoegen</button>
+
+    </form>
 </div>
 </body>
