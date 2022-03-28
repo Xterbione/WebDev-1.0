@@ -43,7 +43,8 @@ public class WordtOpgeslagenInCollectieRepo
                         DrukModel.StripboekModel = StripboekModel;
                         WordtOpgeslagenInCollectieVanModel.DrukModel = DrukModel;
                         return WordtOpgeslagenInCollectieVanModel;
-                    }, new { gebruikerId }, splitOn: "drukId, stripboekId, uitgeverId, serieId, genreId");
+                    }, new {gebruikerId}, splitOn: "drukId, stripboekId, uitgeverId, serieId, genreId");
         return strips;
     }
+
 }

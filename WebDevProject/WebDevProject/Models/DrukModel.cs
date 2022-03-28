@@ -11,10 +11,10 @@
         public decimal waarde { get; set; }
         public string isbn { get; set; }
         public int uitgever_id { get; set; }
+        
+        public List<WerktAanModel> werkenAan = new ();
 
         public StripboekModel StripboekModel { get; set; }
         public UitgeverModel UitgeverModel { get; set; }
-        public WerktAanModel WerktAanModel { set; get; }
-        public CreatorModel CreatorModel { get; set; }
     }
 }

@@ -11,9 +11,7 @@ namespace WebDevProject.Repositories
         {
             return new DBUtils().GetDbConnection();
         }
-
-
-
+        
         public IEnumerable<SerieModel> Get()
         {
             string sql = "SELECT * " +
