@@ -8,9 +8,9 @@ namespace WebDevProject.Pages
         public IActionResult OnGet()
         { 
             // SessionExten
-            if (HttpContext.Session.GetString("cockie") != null)
+            if (HttpContext.Session.GetString("cookie") != null)
             {
-                HttpContext.Session.Remove("cockie");
+                HttpContext.Session.Remove("cookie");
               
                 return new RedirectToPageResult("/Index");
             }

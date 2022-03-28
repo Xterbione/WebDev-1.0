@@ -26,7 +26,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" asp-area="" asp-page="/Index">Home</a>
                     </li>
-                    @if (Context.Session.GetString("cockie") != null)
+                    @if (Context.Session.GetString("cookie") != null)
                     {
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-page="/MijnCollectie">Mijn Collectie</a>
@@ -38,7 +38,7 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" asp-area="" asp-page="/Contact">Contact</a>
                     </li>
-                    @if (Context.Session.GetString("cockie") == null)
+                    @if (Context.Session.GetString("cookie") == null)
                     {
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-page="/Login">Inloggen</a>
@@ -48,11 +48,11 @@
                             <a class="nav-link text-white" asp-area="" asp-page="/Register">Registreren</a>
                         </li>
                     }
-                    @if (Context.Session.GetString("cockie") != null)
+                    @if (Context.Session.GetString("cookie") != null)
                     {
 @*                        @{
                             hier word de cookie terug gezet naar een object zodat je daar data uit kunt halen
-                            string rawsession = Context.Session.GetString("cockie");
+                            string rawsession = Context.Session.GetString("cookie");
                             GebruikerModel gebruiker = JsonSerializer.Deserialize<GebruikerModel>(rawsession);
                         }*@
 
@@ -64,7 +64,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-page="/Profile">Profiel</a>
                         </li>
-                        //HttpContext.session.remove("cockie");
+                        //HttpContext.session.remove("cookie");
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-page="/Logout">Logout</a>
                         </li>
@@ -82,12 +82,11 @@
                 </form>
             </div>
         </div>
-    </div>
 </nav>
 
-<!--header image-->
+@*<!--header image-->
 <img src="~/images/banner.jpg" alt="Loading" id="headerImg"/>
-<!--header image-->
+<!--header image-->*@
 
   
     <div class="container">

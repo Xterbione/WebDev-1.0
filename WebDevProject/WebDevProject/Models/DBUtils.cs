@@ -10,7 +10,7 @@ namespace WebDevProject.Pages
             return new MySqlConnection(
                     "Server=127.0.0.1;Port=3306;" +
                     "Database=stripboeken;" +
-                    "Uid=root;Pwd=pmHT*haW6r32LKJ#;"
+                    "Uid=root;Pwd=1234;"
                     // Svens pw: pmHT*haW6r32LKJ#
                     // Ahmads pw: 1234
                     // Ohter pw: 
