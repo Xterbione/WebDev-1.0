@@ -1,0 +1,17 @@
+@page
+@model WebDevProject.Pages.Collectie.StripboekKiezen
+
+<head>
+    <title></title>
+</head>
+<body>
+<div>
+    <form method="post">
+        <label class="form-label mb-1">Kies een stripboek om toe te voegen</label>
+        <div class="input-group mb-3">
+            <select class="form-select" name="stripboekId" asp-items="Model.Stripboeken"></select>
+        </div>
+        <button class="btn btn-primary" type="submit">Toevoegen</button>
+    </form>
+</div>
+</body>

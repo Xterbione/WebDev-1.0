@@ -6,7 +6,7 @@ using WebDevProject.Pages;
 
 namespace WebDevProject.Repositories
 {
-    public class StripBoekRepo
+    public class StripboekRepo
     {
         string sql = "SELECT * " +
                      "FROM stripboek " +

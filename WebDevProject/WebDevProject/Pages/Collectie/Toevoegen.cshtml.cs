@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using WebDevProject.Models;
 using WebDevProject.Repositories;
 
@@ -9,31 +10,49 @@ namespace WebDevProject.Pages.Collectie;
 public class Toevoegen : PageModel
 {
     public string erromessage = "";
+    
     private WordtOpgeslagenInCollectieRepo wordtOpgeslagenInCollectieRepo = new WordtOpgeslagenInCollectieRepo();
     private DrukRepo DrukRepo = new();
+    private StripboekRepo stripboekRepo = new StripboekRepo();
+    public int GebruikerId { get; set; }
+    public SelectList Stripboeken { get; set; }
     public SelectList Drukken { get; set; }
-
+    public GebruikerModel Gebruiker { get; set; }
 
     [BindProperty] public WordtOpgeslagenInCollectieVanModel NieuwBoek { get; set; }
     
-    public void OnGet([FromRoute] int gebuikerId)
+    public void OnGet(int gebruikerId)
     {
-        NieuwBoek.gebruiker_id = gebuikerId;
-        var drukModels = DrukRepo.Get();
-        
-        var drukDictionary = drukModels.ToDictionary(x => x.drukId, x => x.StripboekModel.stripboektitel);
-        Drukken = new SelectList(drukDictionary, "Key", "Value");
+        GebruikerId = gebruikerId;
+        var stripboeken = stripboekRepo.Get();
+        var stripDictionary = stripboeken.ToDictionary(x => x.StripboekId, x => x.stripboektitel);
+        Stripboeken = new SelectList(stripDictionary, "Key", "Value");
+
+        if (HttpContext.Session.GetString("cockie") != null)
+        {
+            string sessionstring = HttpContext.Session.GetString("cockie");
+            Gebruiker = JsonConvert.DeserializeObject<GebruikerModel>(sessionstring);
+        }
     }
 
-    public IActionResult OnPost()
+    public void OnPostStripboek(int stripboekId)
     {
-        if (!ModelState.IsValid)
-        {
-            erromessage = "Stripboeken is niet gelukt, probeer het opnieuw";
-            return Page();
-        }
+        var drukModels = DrukRepo.Get(stripboekId);
+        
+        var drukDictionary = drukModels.ToDictionary(x => x.drukId, x => x.druk_datum );
+        Drukken = new SelectList(drukDictionary, "Key", "Value");
+        
+    }
 
-        var newBook = wordtOpgeslagenInCollectieRepo.Insert(NieuwBoek);
+    public IActionResult OnPostDruk()
+    {
+        if (HttpContext.Session.GetString("cockie") != null)
+        {
+            string sessionstring = HttpContext.Session.GetString("cockie");
+            Gebruiker = JsonConvert.DeserializeObject<GebruikerModel>(sessionstring);
+        }
+        
+        wordtOpgeslagenInCollectieRepo.Add(NieuwBoek);
         return new RedirectToPageResult(nameof(Collectie.Index));
     }
 }

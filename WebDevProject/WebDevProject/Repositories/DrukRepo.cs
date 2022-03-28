@@ -49,9 +49,9 @@ namespace WebDevProject.Repositories
         /// </summary>
         /// <param name="drukId"></param>
         /// <returns></returns>
-        public IEnumerable<DrukModel> Get(int stripboek_id)
+        public IEnumerable<DrukModel> Get(int stripboekId)
         {
-            sql = sql + "WHERE stripboek_id = @stripboek_id";
+            sql = sql + "WHERE stripboek_id = @stripboekId";
             
             using var connection = GetConnection();
             //normal query for list
@@ -66,7 +66,7 @@ namespace WebDevProject.Repositories
                         DrukModel.StripboekModel = StripboekModel;
                         DrukModel.UitgeverModel = UitgeverModel;
                         return DrukModel;
-                    }, new {stripboek_id}, splitOn: "stripboekId, serieId, genreId, uitgeverId");
+                    }, new {stripboekId}, splitOn: "stripboekId, serieId, genreId, uitgeverId");
             return strips;        
         }
 

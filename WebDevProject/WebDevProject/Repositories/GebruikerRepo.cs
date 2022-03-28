@@ -27,8 +27,8 @@ public class GebruikerRepo
 
         using var connection = GetConnection();
         //normal query for list
-        var strips = connection.Query<GebruikerModel>(sql);
-        return strips;
+        var gebruiker = connection.Query<GebruikerModel>(sql);
+        return gebruiker;
     }
 
     /// <summary>
@@ -43,7 +43,6 @@ public class GebruikerRepo
         string sql = @"INSERT INTO gebruiker(gebruikersnaam, geboortedatum, email, wachtwoord)
                        VALUES (@gebruikersnaam,@geboortedatum, @email,@wachtwoord)";
         var excute = connection.Execute(sql, new {gebruikersnaam, geboortedatum,email, wachtwoord});
-
     }
 
     public GebruikerModel Get(string email)

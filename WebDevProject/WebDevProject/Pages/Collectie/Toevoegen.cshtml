@@ -1,4 +1,7 @@
 @page "{gebruikerId:int}"
+@using WebDevProject.Models
+@using MySqlX.XDevAPI
+@using Newtonsoft.Json
 @model WebDevProject.Pages.Collectie.Toevoegen
 
 <head>
@@ -9,9 +12,23 @@
     <h1>Boek aan collectie toevoegen</h1>
 </div>
 <span class="alert-danger">@Model.erromessage</span>
+
+<div class="mb-5">
+    <form asp-page-handler="Stripboek" method="post">
+        <label class="form-label mb-1">Kies een stripboek om toe te voegen</label>
+        <div class="input-group mb-3">
+            <select class="form-select mb-3" name="stripboekId" asp-items="Model.Stripboeken"></select>
+        </div>
+        <button class="btn btn-primary">Boek kiezen</button>
+    </form>
+</div>
+
+
 <div>
-    <form method="post">
-        <label class="form-label mb-1">Druk</label>
+    <form asp-page-handler="druk" method="post">
+        @* <label type="hidden" value="@Model.GebruikerId" asp-for="NieuwBoek.gebruiker_id"/> *@
+       
+        <label class="form-label mb-1">Drukdatum</label>
         <select class="form-select mb-3" asp-for="NieuwBoek.druk_id" asp-items="@Model.Drukken"></select>
         <label class="form-label mb-1" asp-for="NieuwBoek.staat"></label>
         <div class="input-group mb-3">
@@ -21,17 +38,20 @@
         <div class="input-group mb-3">
             <input class="form-control" type="text" asp-for="NieuwBoek.aankoop_locatie"/>
         </div>
+        <label class="form-label mb-1" asp-for="NieuwBoek.aankoop_waarde"></label>
+        <div class="input-group mb-3">
+            <input class="form-control" type="decimal" asp-for="NieuwBoek.aankoop_waarde"/>
+        </div>
         <label class="form-label mb-1" asp-for="NieuwBoek.beoordeling"></label>
         <div class="input-group mb-3">
-            <input class="form-control" type="number" asp-for="NieuwBoek.beoordeling"/>
-        </div>
-        <label class="form-label mb-1" asp-for="NieuwBoek.aankoop_waarde"></label>
-        <div class="input-group mb-3">
-            <input class="form-control" type="number" asp-for="NieuwBoek.aankoop_waarde"/>
-        </div>
-        <label class="form-label mb-1" asp-for="NieuwBoek.aankoop_waarde"></label>
-        <div class="input-group mb-3">
-            <input class="form-range" min="1" max="5" step="1" type="range" asp-for="NieuwBoek.aankoop_waarde"/>
+            <select class="form-select" asp-for="NieuwBoek.beoordeling">
+                <option value="">Geen beoordeling</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
         </div>
         <button class="btn btn-primary" type="submit">Toevoegen</button>
 

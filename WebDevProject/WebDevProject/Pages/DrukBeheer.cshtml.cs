@@ -75,7 +75,7 @@ namespace WebDevProject.Pages
         public WerktAanRepo WerktAanRepo = new WerktAanRepo();
         public CreatorRepo creatorRepo = new CreatorRepo(); 
         public IEnumerable<StripboekModel> stripboeken { get; set; }
-        public StripBoekRepo stripBoekRepo = new StripBoekRepo();
+        public StripboekRepo StripboekRepo = new StripboekRepo();
 
 
 
@@ -149,7 +149,7 @@ namespace WebDevProject.Pages
                 }
             }
 
-            stripboeken = stripBoekRepo.Get();
+            stripboeken = StripboekRepo.Get();
 
         }
     }
