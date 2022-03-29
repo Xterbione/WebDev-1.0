@@ -35,6 +35,8 @@ public class seriebeheer : PageModel
     {
         serieRepo.DeleteSingle(serieId);
         Series = serieRepo.Get();
+        TempData["AlertMessage"] = "Serie Deleted successfully...";
+
     }
     
     public void OnPostAdd([FromForm] string stringlopend)
@@ -51,6 +53,8 @@ public class seriebeheer : PageModel
         {
             serieRepo.insert(serie, landvanoorsprng,eerstepublicatie,lopend);
             Series = serieRepo.Get();
+            TempData["AlertMessage"] = "Serie Added successfully...";
+
 
         }
        

@@ -31,8 +31,8 @@ public class serieUpdate : PageModel
         {
 
             serieRepo.Update(serieId,serie,landvanoorsprong,eerstepublcatie,lopend);
+            TempData["AlertMessage"] = "Serie Updated successfully...";
             return Redirect("/serie/seriebeheer");
-
         }
         else
         {
