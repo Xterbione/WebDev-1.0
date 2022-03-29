@@ -4,6 +4,24 @@
 }
 <div class="container" style="margin-bottom: 60px;">
     <h1>Stripboek Beheer</h1>
+    @if (Model.stage == 1)
+    {
+        <div class="alert alert-success" role="alert">
+            boek is geupdate
+        </div>
+    }
+    else if (Model.stage == 2)
+    {
+        <div class="alert alert-success" role="alert">
+            boek is aangemaakt
+        </div>
+    }
+    else if (Model.stage == 3)
+    {
+        <div class="alert alert-danger" role="alert">
+            boek is verwijderd
+        </div>
+    }
     <div style="overflow-x:auto;">
         <table class="table table-striped">
             <thead>
@@ -50,13 +68,13 @@
                                     {
                                         if (item.serie_id == item2.serieId)
                                         {
-                                            <option selected value="@item2.serieId">@item2.serieTitel</option>
-                                        } 
+                                        <option selected value="@item2.serieId">@item2.serieTitel</option>
+                                        }
                                         else
                                         {
-                                            <option value="@item2.serieId">@item2.serieTitel</option>
+                                        <option value="@item2.serieId">@item2.serieTitel</option>
                                         }
-                                        
+
                                     }
 
                             </select>
