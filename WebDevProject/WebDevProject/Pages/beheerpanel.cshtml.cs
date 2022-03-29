@@ -5,8 +5,14 @@ namespace WebDevProject.Pages
 {
     public class Beheerpanel : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("cockie") == null)
+            {
+                return new RedirectToPageResult("/Index");
+            }
+            // return new RedirectToPageResult("/Index");
+            return Page();
         }
     }
 }

@@ -6,7 +6,7 @@ using WebDevProject.Pages;
 
 namespace WebDevProject.Repositories
 {
-    public class StripBoekRepo
+    public class StripboekRepo
     {
         string sql = "SELECT * " +
                      "FROM stripboek " +
@@ -99,6 +99,7 @@ namespace WebDevProject.Repositories
                 VALUES (@genreid, @titel, @paginas, @volgnummer, @serieid );";
             var removeSeparate = connection.Execute(sql, new {genreid, titel, paginas, volgnummer, serieid});
         }
+        
 
         public IEnumerable<StripboekModel> Search(string selected, string search)
         {

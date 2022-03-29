@@ -75,7 +75,7 @@ namespace WebDevProject.Pages
         public WerktAanRepo WerktAanRepo = new WerktAanRepo();
         public CreatorRepo creatorRepo = new CreatorRepo(); 
         public IEnumerable<StripboekModel> stripboeken { get; set; }
-        public StripBoekRepo stripBoekRepo = new StripBoekRepo();
+        public StripboekRepo StripboekRepo = new StripboekRepo();
 
 
 
@@ -131,9 +131,18 @@ namespace WebDevProject.Pages
             OnAll();
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            OnAll();
+            if (HttpContext.Session.GetString("cockie") == null)
+            {
+                return new RedirectToPageResult("/Index");
+
+            }
+            else
+            {
+                OnAll();
+            }
+            return Page();
         }
 
         public void OnAll()
@@ -149,7 +158,7 @@ namespace WebDevProject.Pages
                 }
             }
 
-            stripboeken = stripBoekRepo.Get();
+            stripboeken = StripboekRepo.Get();
 
         }
     }

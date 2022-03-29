@@ -44,32 +44,40 @@ namespace WebDevProject.Pages
         public IEnumerable<StripboekModel> strips { get; set; }
         public IEnumerable<GenreModel> genres { get; set; }
         public IEnumerable<SerieModel> series { get; set; }
-        StripBoekRepo sprepo = new StripBoekRepo();
+        StripboekRepo sprepo = new StripboekRepo();
         GenreRepo grepo = new GenreRepo();
         SerieRepo serieRepo = new SerieRepo();
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
-
-            if (ucat != 0 && ustitel != null && uvolgnummer != null && uaantalpaginas != 0 && userie != 0 && updateid != 0)
+            if (HttpContext.Session.GetString("cockie") == null)
             {
-                sprepo.update(ucat, ustitel, uaantalpaginas, uvolgnummer, userie, updateid);
-            }
+                return new RedirectToPageResult("/Index");
 
-            if (ncat != 0 && nstitel != null && nvolgnummer != null && naantalpaginas != 0 && nserie != 0)
+            }
+            else
             {
-                sprepo.insert(ncat, nstitel, naantalpaginas, nvolgnummer, nserie);
+
+                if (ucat != 0 && ustitel != null && uvolgnummer != null && uaantalpaginas != 0 && userie != 0 && updateid != 0)
+                {
+                    sprepo.update(ucat, ustitel, uaantalpaginas, uvolgnummer, userie, updateid);
+                }
+
+                if (ncat != 0 && nstitel != null && nvolgnummer != null && naantalpaginas != 0 && nserie != 0)
+                {
+                    sprepo.insert(ncat, nstitel, naantalpaginas, nvolgnummer, nserie);
+                }
+
+
+                if (delete != 0)
+                {
+                    sprepo.DeleteSingle(delete);
+                }
+
+                strips = sprepo.Get();
+                genres = grepo.Get();
+                series = serieRepo.Get();
             }
-
-
-            if (delete != 0 )
-            {
-                sprepo.DeleteSingle(delete);
-            }
-
-            strips = sprepo.Get();
-            genres = grepo.Get();
-            series = serieRepo.Get();
+            return Page();
         }
     }
 }

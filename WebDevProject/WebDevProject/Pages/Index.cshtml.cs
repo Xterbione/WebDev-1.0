@@ -9,8 +9,7 @@ public class Index : PageModel
 {
     private readonly ILogger<Index> _logger;
     public IEnumerable<StripboekModel> StripboekModels { get; set; }
-    public StripBoekRepo stripboekRepo = new();
-    
+    public StripboekRepo stripboekRepo = new();
 
     public Index(ILogger<Index> logger)
     {
