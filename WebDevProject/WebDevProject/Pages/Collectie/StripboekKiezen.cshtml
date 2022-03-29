@@ -1,17 +1,25 @@
 @page
+@using WebDevProject.Models
 @model WebDevProject.Pages.Collectie.StripboekKiezen
 
 <head>
     <title></title>
 </head>
 <body>
-<div>
-    <form method="post">
-        <label class="form-label mb-1">Kies een stripboek om toe te voegen</label>
-        <div class="input-group mb-3">
-            <select class="form-select" name="stripboekId" asp-items="Model.Stripboeken"></select>
-        </div>
-        <button class="btn btn-primary" type="submit">Toevoegen</button>
-    </form>
-</div>
+ <div class="mb-5">
+     <form action="@nameof(Toevoegen)" method="get">
+         
+         <label class="form-label mb-1">Kies een stripboek om toe te voegen</label>
+         <div class="input-group mb-3">
+             <select class="form-select mb-3" name="stripboekId">
+                 <option disabled>Kies een stripboek</option>
+                 @foreach (StripboekModel stripboek in Model.Stripboeken)
+                 {
+                     <option value="@stripboek.StripboekId">@stripboek.stripboektitel</option>
+                 }
+             </select>
+         </div>
+         <button class="btn btn-primary" type="submit">Boek kiezen</button>
+     </form>
+    </div>
 </body>

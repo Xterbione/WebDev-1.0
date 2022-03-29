@@ -10,7 +10,7 @@
     <h1>Collectie van @Model.Gebruiker.gebruikersnaam</h1>
 </div>
 <div class="mb-3 align-items-start">
-    <a class="btn btn-primary mb-3" asp-page="@nameof(Toevoegen)" asp-route-gebruikerId="@Model.Gebruiker.GebruikerId">Boek toevoegen</a>
+    <a class="btn btn-primary mb-3" asp-page="@nameof(StripboekKiezen)">Boek toevoegen</a>
 </div>
 <div class="row d-flex justify-content-around">
     @foreach (string serie in @Model.series)
@@ -48,14 +48,14 @@
                             <td>@item2.opslag_locatie</td>
                             <td>
                                 <a class="btn" asp-page="@nameof(Aanpassen)"
-                                   asp-route-gebruikerId="@Model.Gebruiker.GebruikerId"
+                                   asp-route-gebruikerId="@Model.Gebruiker.gebruikerId"
                                    asp-route-drukId="@item2.druk_id">
                                     Aanpassen
                                 </a>
                             </td>
                             <td>
                                 <a class="btn btn-danger" asp-page="@nameof(Verwijderen)"
-                                   asp-route-gebruikerId="@Model.Gebruiker.GebruikerId"
+                                   asp-route-gebruikerId="@Model.Gebruiker.gebruikerId"
                                    asp-route-drukId="@item2.druk_id">
                                     Verwijder
                                 </a>

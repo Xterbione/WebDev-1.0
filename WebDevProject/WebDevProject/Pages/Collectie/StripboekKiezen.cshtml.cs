@@ -8,22 +8,12 @@ namespace WebDevProject.Pages.Collectie;
 
 public class StripboekKiezen : PageModel
 {
-    private StripboekRepo stripboekRepo = new StripboekRepo();
+    public IEnumerable<StripboekModel> Stripboeken { get; set; }
     
-    public SelectList Stripboeken { get; set; }
-    public StripboekModel Stripboek { get; set; }
     
     public void OnGet()
-    {
-        var stripboeken = stripboekRepo.Get();
-        var stripDictionary = stripboeken.ToDictionary(x => x.StripboekId, x => x.stripboektitel);
-        Stripboeken = new SelectList(stripDictionary, "Key", "Value");
+    { 
+        Stripboeken = new StripboekRepo().Get();
     }
-
-    public IActionResult OnPost(int stripboekId)
-    {
-        
-        
-        return new RedirectToPageResult(nameof(Toevoegen));
-    }
+    
 }

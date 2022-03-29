@@ -12,20 +12,21 @@ public class WordtOpgeslagenInCollectieRepo
         return new DBUtils().GetDbConnection();
     }
 
+    public string sql = @"SELECT * " +
+                         "FROM Wordt_opgeslagen_in_collectie_van " +
+                         "INNER JOIN Druk on Wordt_opgeslagen_in_collectie_van.druk_id = Druk.drukId " +
+                         "INNER JOIN Stripboek on stripboek.stripboekId = druk.stripboek_id " +
+                         "INNER JOIN Uitgever on Druk.uitgever_id = Uitgever.uitgeverId " +
+                         "INNER JOIN serie on stripboek.serie_id = serie.serieId " +
+                         "INNER JOIN genre on stripboek.genre_id = genre.genreId ";
     /// <summary>
     /// gets all books
     /// </summary>
     /// <returns></returns>
     public IEnumerable<WordtOpgeslagenInCollectieVanModel> Get(int gebruikerId)
     {
-        string sql = @"SELECT * " +
-                     "FROM Wordt_opgeslagen_in_collectie_van " +
-                     "INNER JOIN Druk on Wordt_opgeslagen_in_collectie_van.druk_id = Druk.drukId " +
-                     "INNER JOIN Stripboek on stripboek.stripboekId = druk.stripboek_id " +
-                     "INNER JOIN Uitgever on Druk.uitgever_id = Uitgever.uitgeverId " +
-                     "INNER JOIN serie on stripboek.serie_id = serie.serieId " +
-                     "INNER JOIN genre on stripboek.genre_id = genre.genreId " +
-                     "WHERE Wordt_opgeslagen_in_collectie_van.gebruiker_id = @gebruikerId ";
+        
+            sql = sql + "WHERE Wordt_opgeslagen_in_collectie_van.gebruiker_id = @gebruikerId ";
 
         using var connection = GetConnection();
         //normal query for list
@@ -46,6 +47,22 @@ public class WordtOpgeslagenInCollectieRepo
                     }, new {gebruikerId}, splitOn: "drukId, stripboekId, uitgeverId, serieId, genreId");
         return strips;
     }
+    
+    /// <summary>
+    /// Verwijdert een rij uit de database met de waarden van gebruikerId en DrukId
+    /// </summary>
+    /// <param name="gebruikerId"></param>
+    /// <param name="drukId"></param>
+    /// <returns></returns>
+    public bool Delete(int gebruikerId, int drukId)
+    {
+        string sql = @"DELETE FROM Wordt_opgeslagen_in_collectie_van
+                    WHERE druk_id = @drukId AND gebruiker_id = @gebruikerId";
+            
+        using var connection = GetConnection();
+        int numOfEffectedRows = connection.Execute(sql, new { gebruikerId, drukId });
+        return numOfEffectedRows == 1;
+    }
 
     /// <summary>
     /// gebruiker_id wordt niet goed opgenomen.
@@ -57,24 +74,33 @@ public class WordtOpgeslagenInCollectieRepo
     /// <param name="aankoop_locatie"></param>
     /// <param name="beoordeling"></param>
     /// <param name="opslag_locatie"></param>
-    public void Add(int druk_id, int gebruiker_id, string staat, double aankoop_waarde, string aankoop_locatie, int beoordeling, string opslag_locatie)
+    public void Add(int druk_id, int gebruiker_id, string staat, double aankoop_waarde, string aankoop_locatie,
+        int beoordeling, string opslag_locatie)
     {
         var connection = GetConnection();
-        string sql = @"INSERT INTO Wordt_opgeslagen_in_collectie_van(druk_id, gebruiker_id, staat, aankoop_waarde, aankoop_locatie, beoordeling, opslag_locatie)
+        string sql =
+            @"INSERT INTO Wordt_opgeslagen_in_collectie_van(druk_id, gebruiker_id, staat, aankoop_waarde, aankoop_locatie, beoordeling, opslag_locatie)
                        VALUES (@druk_id, @gebruiker_id, @staat, @aankoop_waarde, @aankoop_locatie, @beoordeling, @opslag_locatie)";
-        var excute = connection.Execute(sql, new {druk_id, gebruiker_id, staat, aankoop_waarde, aankoop_locatie, beoordeling, opslag_locatie});
+        var excute = connection.Execute(sql,
+            new {druk_id, gebruiker_id, staat, aankoop_waarde, aankoop_locatie, beoordeling, opslag_locatie});
     }
 
-    /// <summary>
-    /// Inserts new boek in collectie van gebruiker
-    /// </summary>
-    /// <param name="nieuwBoek"></param>
-//     public WordtOpgeslagenInCollectieVanModel Insert(WordtOpgeslagenInCollectieVanModel nieuwBoek)
-//     {
-//         using var connection = GetConnection();
-//         var sql = @"INSERT INTO Wordt_opgeslagen_in_collectie_van (druk_id, gebruiker_id, staat, aankoop_waarde, aankoop_locatie, beoordeling, opslag_locatie)
-//                     VALUES (@nieuwBoek.druk_id, @nieuwBoek.gebruiker_id, @nieuwBoek.staat, @nieuwBoek.aankoop_waarde, @nieuwBoek.aankoop_locatie, @nieuwBoek.beoordeling, @nieuwBoek.opslag_locatie );";
-//         var removeSeparate = connection.Execute(sql, new {nieuwBoek});
-//         return nieuwBoek;
-//     }
+    public void Add(WordtOpgeslagenInCollectieVanModel nieuwBoek)
+    {
+        var connection = GetConnection();
+        string sql =
+            @"INSERT INTO Wordt_opgeslagen_in_collectie_van(druk_id, gebruiker_id, staat, aankoop_waarde, aankoop_locatie, beoordeling, opslag_locatie)
+                       VALUES (@druk_id, @gebruiker_id, @staat, @aankoop_waarde, @aankoop_locatie, @beoordeling, @opslag_locatie)";
+        var excute = connection.Execute(sql, nieuwBoek);
+    }
+
+    public void DeleteSingle(int drukId)
+    {
+        //the query
+        string sql = @"DELETE FROM Wordt_opgeslagen_in_collectie_van WHERE druk_id = @drukId";
+        //the connection
+        using var connection = GetConnection();
+        //executes query
+        connection.Execute(sql, new {drukId});
+    }
 }

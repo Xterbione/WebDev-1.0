@@ -4,11 +4,11 @@ namespace WebDevProject.Models;
 
 public class WordtOpgeslagenInCollectieVanModel
 {
-    [Required]
-    public int druk_id { get; set; }
     
-    [Required]
-    public int gebruiker_id { get; set; }
+    public int druk_id { get; set; }
+
+
+    public int gebruiker_id { get; set; } = 0;
     
     [Display(Name = "Staat")]
     public string staat { get; set; }
