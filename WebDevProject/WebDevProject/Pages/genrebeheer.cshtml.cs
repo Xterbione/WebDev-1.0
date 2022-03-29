@@ -15,7 +15,7 @@ public class genrebeheer : PageModel
 
     public IActionResult OnGet()
     {
-        if (HttpContext.Session.GetString("cockie") == null)
+        if (HttpContext.Session.GetString("cookie") == null)
         {
             return new RedirectToPageResult("/Index");
 
@@ -31,6 +31,8 @@ public class genrebeheer : PageModel
     {
         genreRepo.DeleteSingle(genre);
         genres = genreRepo.Get();
+        TempData["AlertMessage"] = "Genre Deleted successfully...";
+
 
     }
     public void OnPostAdd()
@@ -39,6 +41,7 @@ public class genrebeheer : PageModel
         {
             genreRepo.insert(genre);
             genres = genreRepo.Get();
+            TempData["AlertMessage"] = "Genre Added successfully...";
 
         }
     }
@@ -48,6 +51,8 @@ public class genrebeheer : PageModel
         {
             genreRepo.Update(hiddengenre,genre);
             genres = genreRepo.Get();
+            TempData["AlertMessage"] = "Genre Updated successfully...";
+
 
         }
     }

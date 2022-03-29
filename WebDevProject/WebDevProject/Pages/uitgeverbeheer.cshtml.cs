@@ -12,7 +12,7 @@ public class uitgeverbeheer : PageModel
     [BindProperty(SupportsGet = true)] public string uitgever { get; set; }  
     public IActionResult OnGet()
     {
-        if (HttpContext.Session.GetString("cockie") == null)
+        if (HttpContext.Session.GetString("cookie") == null)
         {
             return new RedirectToPageResult("/Index");
 
@@ -27,6 +27,7 @@ public class uitgeverbeheer : PageModel
     {
         uitgeverRepo.DeleteSingle(uitgever);
         uitgevers = uitgeverRepo.Get();
+        TempData["AlertMessage"] = "Uitgever Deleted successfully...";
 
     }
     public void OnPostAdd()
@@ -35,6 +36,7 @@ public class uitgeverbeheer : PageModel
         {
             uitgeverRepo.insert(uitgever);
             uitgevers = uitgeverRepo.Get();
+            TempData["AlertMessage"] = "Uitgever Added successfully...";
         }
     }
 
@@ -43,6 +45,7 @@ public class uitgeverbeheer : PageModel
         if (hiddenuitgever != 0 && uitgever != null)
         {
             uitgeverRepo.Update(hiddenuitgever, uitgever);
+            TempData["AlertMessage"] = "Uitgever Updated successfully...";
             uitgevers = uitgeverRepo.Get();
 
         }

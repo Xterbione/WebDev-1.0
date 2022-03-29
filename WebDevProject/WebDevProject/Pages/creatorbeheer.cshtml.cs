@@ -12,7 +12,7 @@ public class creatorbeheer : PageModel
     [BindProperty(SupportsGet = true)] public string creator { get; set; }  
     public IActionResult OnGet()
     {
-        if (HttpContext.Session.GetString("cockie") == null)
+        if (HttpContext.Session.GetString("cookie") == null)
         {
             return new RedirectToPageResult("/Index");
 
@@ -27,6 +27,7 @@ public class creatorbeheer : PageModel
     {
         creatorRepo.DeleteSingle(creator);
         creators = creatorRepo.Get();
+        TempData["AlertMessage"] = "Creator Deleted successfully...";
     }
     public void OnPostAdd()
     {
@@ -34,6 +35,8 @@ public class creatorbeheer : PageModel
         {
             creatorRepo.insert(creator);
             creators = creatorRepo.Get();
+            TempData["AlertMessage"] = "Creator Added successfully...";
+
         }
     }
     
@@ -43,6 +46,8 @@ public class creatorbeheer : PageModel
         {
             creatorRepo.Update(hiddenCreator,creator);
             creators = creatorRepo.Get();
+            TempData["AlertMessage"] = "Creator Updated successfully...";
+
 
         }
     }
