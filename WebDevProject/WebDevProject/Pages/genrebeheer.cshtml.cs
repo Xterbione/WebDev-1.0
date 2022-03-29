@@ -15,7 +15,7 @@ public class genrebeheer : PageModel
 
     public IActionResult OnGet()
     {
-        if (HttpContext.Session.GetString("cookie") == null)
+        if (HttpContext.Session.GetString("cockie") == null)
         {
             return new RedirectToPageResult("/Index");
 

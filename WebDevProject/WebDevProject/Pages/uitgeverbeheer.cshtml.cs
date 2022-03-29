@@ -12,7 +12,7 @@ public class uitgeverbeheer : PageModel
     [BindProperty(SupportsGet = true)] public string uitgever { get; set; }  
     public IActionResult OnGet()
     {
-        if (HttpContext.Session.GetString("cookie") == null)
+        if (HttpContext.Session.GetString("cockie") == null)
         {
             return new RedirectToPageResult("/Index");
 

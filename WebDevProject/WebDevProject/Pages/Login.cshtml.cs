@@ -19,7 +19,7 @@ public class Login : PageModel
 
     public IActionResult OnGet()
     {
-        if (HttpContext.Session.GetString("cookie") != null)
+        if (HttpContext.Session.GetString("cockie") != null)
         {
             return new RedirectToPageResult("/Index");
 
@@ -38,7 +38,7 @@ public class Login : PageModel
                 if (user.wachtwoord == wachtwoord )
                 {
                     var cockie = JsonSerializer.Serialize<GebruikerModel>(user);
-                    HttpContext.Session.SetString("cookie",cockie.ToString());
+                    HttpContext.Session.SetString("cockie",cockie.ToString());
                     Message = "Login Succesful";
                     return new RedirectToPageResult("/collectie/index");
                 }
