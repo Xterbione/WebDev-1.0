@@ -21,10 +21,12 @@ public class Login : PageModel
     {
         if (HttpContext.Session.GetString("cockie") != null)
         {
-            return new RedirectToPageResult("/Index");
+            HttpContext.Session.Remove("cockie");
+            Message = "Logout succesful";
+           // return new RedirectToPageResult("/Index");
 
         }
-        return Page();
+       return Page();
     }
 
     public IActionResult OnPost()
