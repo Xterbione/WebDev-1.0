@@ -9,6 +9,8 @@ namespace WebDevProject.Pages.Collectie;
 public class Index : PageModel
 {
     public IEnumerable<WordtOpgeslagenInCollectieVanModel> WordtOpgeslagenInCollectieVanModels { get; set; }
+   
+    public bool WasIngelogd{ get; set; }
 
     public WordtOpgeslagenInCollectieRepo WordtOpgeslagenInCollectieRepo = new();
     public DrukRepo drukRepo = new ();
@@ -21,7 +23,9 @@ public class Index : PageModel
     {
         if (HttpContext.Session.GetString("cockie") != null)
         {
+        
             string sessionstring = HttpContext.Session.GetString("cockie");
+            
             Gebruiker = JsonConvert.DeserializeObject<GebruikerModel>(sessionstring);
 
             WordtOpgeslagenInCollectieVanModels = WordtOpgeslagenInCollectieRepo.Get(Gebruiker.GebruikerId);
