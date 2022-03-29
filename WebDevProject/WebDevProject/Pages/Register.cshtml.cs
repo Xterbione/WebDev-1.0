@@ -17,6 +17,9 @@ public class Register : PageModel
     [BindProperty] [Required]public DateTime geboortedatum { get; set; }
     
     [BindProperty, DataType(DataType.Password)][Required] public string wachtwoord { get; set; }
+    
+    [BindProperty][Required] public bool isAdmin{ get; set; }
+
 
     public string Message { get; set; }
 
@@ -43,8 +46,8 @@ public class Register : PageModel
 
             else
             {
-                register.Register(gebruikersnaam, email, geboortedatum, wachtwoord);
-                Message = "je bent nu geregistreerd, je kunt nu inloggen";
+                register.Register(gebruikersnaam, email, geboortedatum, wachtwoord,isAdmin);
+                Message = "je bent nu geregistreerd.";
             }
 
           

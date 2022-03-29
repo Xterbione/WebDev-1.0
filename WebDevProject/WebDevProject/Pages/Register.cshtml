@@ -46,7 +46,13 @@
                                class="form-control form-control-sm"
                                id="password"/>
                     </div>
-                    <div><p>@Model.Message</p></div>
+                          <label>Registreer Als Admin: </label>
+                          <input type="checkbox"
+                                 asp-for="isAdmin"
+                                 data-val="false"
+                                 />
+                    
+                    <p>@Model.Message</p>
                     <button type="submit" class="btn btn-light ibtn">Registreren</button>
                 </form>
             </div>

@@ -19,7 +19,7 @@ public class Login : PageModel
 
     public IActionResult OnGet()
     {
-        if (HttpContext.Session.GetString("cockie") != null)
+        if (HttpContext.Session.GetString("cookie") != null)
         {
             return new RedirectToPageResult("/Index");
 
