@@ -47,29 +47,33 @@ namespace WebDevProject.Pages
         StripboekRepo sprepo = new StripboekRepo();
         GenreRepo grepo = new GenreRepo();
         SerieRepo serieRepo = new SerieRepo();
+        public int stage { get; set; }
+
         public IActionResult OnGet()
         {
             if (HttpContext.Session.GetString("cockie") == null)
             {
                 return new RedirectToPageResult("/Index");
-
             }
             else
             {
 
                 if (ucat != 0 && ustitel != null && uvolgnummer != null && uaantalpaginas != 0 && userie != 0 && updateid != 0)
                 {
+                    stage = 1;
                     sprepo.update(ucat, ustitel, uaantalpaginas, uvolgnummer, userie, updateid);
                 }
 
                 if (ncat != 0 && nstitel != null && nvolgnummer != null && naantalpaginas != 0 && nserie != 0)
                 {
+                    stage = 2;
                     sprepo.insert(ncat, nstitel, naantalpaginas, nvolgnummer, nserie);
                 }
 
 
                 if (delete != 0)
                 {
+                    stage = 3;
                     sprepo.DeleteSingle(delete);
                 }
 
