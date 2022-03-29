@@ -2,11 +2,21 @@
 @model WebDevProject.Pages.Collectie.Verwijderen
 
 <head>
-    <title></title>
+    <title>Verwijderen</title>
 </head>
 
 <body>
-<div>
-    
+<div class="form-control mb-3">
+    @foreach (var item in Model.collectieModels)
+    {
+        if (item.druk_id == Model.DrukId)
+        {
+            <h1 class="mb-3">Weet je zeker dat je @item.DrukModel.StripboekModel.stripboektitel wilt verwijderen?</h1>
+        }
+    }
+    <form method="POST">
+        <button class="btn btn-danger" asp-page-handler="Delete">Yes</button>
+        <button class="btn btn-secondary" asp-page-handler="Cancel">Cancel</button>
+    </form>
 </div>
 </body>

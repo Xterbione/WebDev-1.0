@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Newtonsoft.Json;
+using  System.Text.Json;
 using WebDevProject.Models;
 using WebDevProject.Repositories;
 
@@ -25,10 +25,9 @@ public class Index : PageModel
         {
         
             string sessionstring = HttpContext.Session.GetString("cockie");
-            
-            Gebruiker = JsonConvert.DeserializeObject<GebruikerModel>(sessionstring);
+            Gebruiker = JsonSerializer.Deserialize<GebruikerModel>(sessionstring);
 
-            WordtOpgeslagenInCollectieVanModels = WordtOpgeslagenInCollectieRepo.Get(Gebruiker.GebruikerId);
+            WordtOpgeslagenInCollectieVanModels = WordtOpgeslagenInCollectieRepo.Get(Gebruiker.gebruikerId);
             foreach (var item in WordtOpgeslagenInCollectieVanModels)
             {
                 string serie = item.DrukModel.StripboekModel.SerieModel.serieTitel;
