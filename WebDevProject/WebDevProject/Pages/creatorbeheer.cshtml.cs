@@ -23,10 +23,11 @@ public class creatorbeheer : PageModel
         }
         return Page();
     }
-    public void OnPostDelete([FromForm] string? hiddenCreator)
+    public void OnPostDelete([FromForm] string? creator)
     {
-        creatorRepo.DeleteSingle(hiddenCreator);
+        creatorRepo.DeleteSingle(creator);
         creators = creatorRepo.Get();
+        TempData["AlertMessage"] = "Creator Deleted successfully...";
     }
     public void OnPostAdd()
     {
@@ -34,6 +35,21 @@ public class creatorbeheer : PageModel
         {
             creatorRepo.insert(creator);
             creators = creatorRepo.Get();
+            TempData["AlertMessage"] = "Creator Added successfully...";
+
         }
     }
+    
+    public void OnPostUpdate([FromForm] string? creator, [FromForm] int hiddenCreator)
+    {
+        if (hiddenCreator !=0 && creator != null) 
+        {
+            creatorRepo.Update(hiddenCreator,creator);
+            creators = creatorRepo.Get();
+            TempData["AlertMessage"] = "Creator Updated successfully...";
+
+
+        }
+    }
+    
 }

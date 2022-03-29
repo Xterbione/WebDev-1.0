@@ -4,7 +4,27 @@
 @{
     Layout = "Shared/_Layout";
 }
-
+@if (TempData["AlertMessage"]==null)
+{
+}
+else if (TempData["AlertMessage"]=="Genre Deleted successfully...")
+{
+    <div class="alert alert-danger">
+        <strong>Success !</strong>@TempData["AlertMessage"]
+    </div>
+}
+else if (TempData["AlertMessage"]=="Genre Added successfully...")
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong>@TempData["AlertMessage"]
+    </div>
+}
+else if (TempData["AlertMessage"] == "Genre Updated successfully...")
+{
+    <div class="alert alert-info">
+        <strong>Success !</strong>@TempData["AlertMessage"]
+    </div>
+}
 <div class="container pt-3 pb-5">
     <div class="row">
         <div class="col">

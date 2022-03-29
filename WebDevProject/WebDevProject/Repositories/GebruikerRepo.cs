@@ -23,8 +23,6 @@ public class GebruikerRepo
     {
         string sql = "SELECT * " +
                      "FROM Gebruiker";
-
-
         using var connection = GetConnection();
         //normal query for list
         var gebruiker = connection.Query<GebruikerModel>(sql);
@@ -37,12 +35,12 @@ public class GebruikerRepo
     /// <param name="naam"></param>
     /// <param name="geboortedatum"></param>
     /// <param name="email"></param>
-    public void Register(string gebruikersnaam, string email,DateTime geboortedatum, string wachtwoord)
+    public void Register(string gebruikersnaam, string email,DateTime geboortedatum, string wachtwoord, bool isAdmin)
     {
         var connection = GetConnection();
-        string sql = @"INSERT INTO gebruiker(gebruikersnaam, geboortedatum, email, wachtwoord)
-                       VALUES (@gebruikersnaam,@geboortedatum, @email,@wachtwoord)";
-        var excute = connection.Execute(sql, new {gebruikersnaam, geboortedatum,email, wachtwoord});
+        string sql = @"INSERT INTO gebruiker(gebruikersnaam, geboortedatum, email, wachtwoord, isAdmin)
+                       VALUES (@gebruikersnaam,@geboortedatum, @email,@wachtwoord,@isAdmin)";
+        var excute = connection.Execute(sql, new {gebruikersnaam, geboortedatum,email, wachtwoord, isAdmin});
     }
 
     public GebruikerModel Get(string email)

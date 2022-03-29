@@ -23,17 +23,71 @@ namespace WebDevProject.Repositories
             var strips = connection.Query<SerieModel>(sql);
             return strips;
         }
+        
         /// <summary>
-        /// Gets SerieModel from database
+        /// deleting a serie 
         /// </summary>
-        /// <param name="serieId">Selects GenreId in database table</param>
-        /// <returns></returns>
-        public SerieModel Get(int serieId)
+        /// <param name="serieUitdelist"></param>
+        public void DeleteSingle(int serieid)
         {
-            string sql = "SELECT * FROM Serie WHERE serieId = @serieId";
+            //the query
+            string sql = @"DELETE FROM serie WHERE serieId = @serieid";
+            //the connection
             using var connection = GetConnection();
-            SerieModel serie = connection.QuerySingle<SerieModel>(sql, new {serieId});
-            return serie;
+            //executes query
+            connection.Execute(sql, new {serieid});
         }
+        
+        
+        /// <summary>
+        /// een serie toevoegen 
+        /// </summary>
+        /// <param name="serie"></param>
+        /// <param name="landVanOorsprong"></param>
+        /// <param name="eerstePublicatie"></param>
+        /// <param name="lopend"></param>
+        public void insert(string serie, string landVanOorsprong, DateTime eerstePublicatie, bool lopend)
+        {
+            using var connection = GetConnection();
+            var sql = @"
+                INSERT INTO serie (serieTitel, land_van_oorsprong, eerste_publicatie, lopend) 
+                VALUES (@serie,@landVanOorsprong,@eerstePublicatie,@lopend)";
+            var removeSeparate = connection.Execute(sql, new {serie, landVanOorsprong,eerstePublicatie,lopend});
+        }
+        
+        
+        /// <summary>
+        /// een serie updaten 
+        /// </summary>
+        /// <param name="serieId"></param>
+        /// <param name="serie"></param>
+        /// <param name="landVanOorsprong"></param>
+        /// <param name="eerstePublicatie"></param>
+        /// <param name="lopend"></param>
+        public void Update(int serieId, string serie, string landVanOorsprong, string eerstePublicatie, bool lopend)
+        {
+            using var connection = GetConnection();
+            var sql = @"
+                UPDATE serie SET serieTitel=@serie,
+                land_van_oorsprong=@landVanOorsprong,
+                eerste_publicatie=@eerstePublicatie,
+                lopend=@lopend
+                WHERE serieId=@serieId";
+            var removeSeparate = connection.Execute(sql, new {serieId,serie, landVanOorsprong,eerstePublicatie,lopend});
+        }
+        
+        
+        public IEnumerable<SerieModel> GetById(int serieId)
+        {
+            string sql = "SELECT * " +
+                         "FROM Serie where serieId=@serieID";
+
+
+            using var connection = GetConnection();
+            //normal query for list
+            var strips = connection.Query<SerieModel>(sql, new {serieId});
+            return strips;
+        }
+
     }
 }

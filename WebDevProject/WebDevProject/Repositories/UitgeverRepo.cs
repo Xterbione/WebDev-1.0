@@ -46,5 +46,12 @@ public class UitgeverRepo
                 VALUES (@uitgever)";
         var removeSeparate = connection.Execute(sql, new {uitgever});
     }
+    public void Update(int uitgeverId, string uitgever)
+    {
+        using var connection = GetConnection();
+        var sql = @"
+                UPDATE uitgever SET uitgever_naam=@uitgever WHERE uitgeverId=@uitgeverId";
+        var removeSeparate = connection.Execute(sql, new {uitgever, uitgeverId});
+    }
 
 }

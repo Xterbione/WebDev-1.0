@@ -52,7 +52,7 @@
                     {
 @*                        @{
                             hier word de cookie terug gezet naar een object zodat je daar data uit kunt halen
-                            string rawsession = Context.Session.GetString("cockie");
+                            string rawsession = Context.Session.GetString("cookie");
                             GebruikerModel gebruiker = JsonSerializer.Deserialize<GebruikerModel>(rawsession);
                         }*@
 
@@ -64,7 +64,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-page="/Profile">Profiel</a>
                         </li>
-                        //HttpContext.session.remove("cockie");
+                        //HttpContext.session.remove("cookie");
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-page="/Logout">Logout</a>
                         </li>
@@ -82,7 +82,11 @@
                 </form>
             </div>
         </div>
-    </nav>
+</nav>
+
+@*<!--header image-->
+<img src="~/images/banner.jpg" alt="Loading" id="headerImg"/>
+<!--header image-->*@
 
   
     <div class="container">

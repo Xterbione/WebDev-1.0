@@ -22,7 +22,7 @@ public class Stripboek : PageModel
     {
         StripboekModel = stripboekRepo.Get(stripboekId);
         StripboekModel.GenreModel = GenreRepo.Get(StripboekModel.genre_id);
-        StripboekModel.SerieModel = SerieRepo.Get(StripboekModel.serie_id);
+        //StripboekModel.SerieModel = SerieRepo.Get(StripboekModel.serie_id);
         Drukken = DrukRepo.Get(stripboekId);
     }
 }

@@ -4,7 +4,27 @@
 @{
     Layout = "Shared/_Layout";
 }
-
+@if (TempData["AlertMessage"]==null)
+{
+}
+else if (TempData["AlertMessage"]=="Creator Deleted successfully...")
+{
+    <div class="alert alert-danger">
+        <strong>Success !</strong>@TempData["AlertMessage"]
+    </div>
+}
+else if (TempData["AlertMessage"]=="Creator Added successfully...")
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong>@TempData["AlertMessage"]
+    </div>
+}
+else if (TempData["AlertMessage"] == "Creator Updated successfully...")
+{
+    <div class="alert alert-info">
+        <strong>Success !</strong>@TempData["AlertMessage"]
+    </div>
+}
 
 <div class="container pt-3 pb-5">
     <div class="row">
@@ -12,9 +32,10 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">Uitgevers</th>
+                    <th scope="col">Creators</th>
                     <th scope="col">Delete</th>
-
+                    <th scope="col">Update creator</th>
+                    <th scope="col">Update</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -23,8 +44,10 @@
                     <tr>
                         <td>@item.creator_naam</td>
                         <form method="post">
-                            <input type="hidden" name="hiddenCreator" value="@item.creator_naam"/>
                             <td><button asp-page-handler="delete" class="btn btn-danger">Delete</button></td>
+                            <input type="hidden" name="hiddenCreator" value="@item.creatorId"/>
+                             <td> <input type="text" name="creator" value="@item.creator_naam" placeholder="Update creator"/></td>
+                            <td><button asp-page-handler="update" class="btn btn-primary">Update</button></td>
                         </form>
                     </tr>
                 }

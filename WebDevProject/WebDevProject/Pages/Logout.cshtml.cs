@@ -9,8 +9,10 @@ namespace WebDevProject.Pages
         { 
             // SessionExten
             if (HttpContext.Session.GetString("cockie") != null)
-            {               
-                return new RedirectToPageResult("/Login");
+            {
+                HttpContext.Session.Remove("cockie");
+              
+                return new RedirectToPageResult("/Index");
             }
             // return new RedirectToPageResult("/Index");
             return Page();

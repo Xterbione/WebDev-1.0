@@ -45,5 +45,13 @@ public class CreatorRepo
                 VALUES (@creator)";
         var removeSeparate = connection.Execute(sql, new {creator});
     }
+    
+    public void Update(int creatorId, string creator)
+    {
+        using var connection = GetConnection();
+        var sql = @"
+                UPDATE creator SET creator_naam=@creator WHERE creatorId=@creatorId";
+        var removeSeparate = connection.Execute(sql, new {creator, creatorId});
+    }
 
 }

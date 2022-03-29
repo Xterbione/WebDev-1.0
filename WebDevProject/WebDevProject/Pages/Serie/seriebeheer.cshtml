@@ -1,0 +1,113 @@
+@page
+@model WebDevProject.Pages.seriebeheer
+
+@{
+    Layout = "Shared/_Layout";
+}
+@if (TempData["AlertMessage"] =="")
+{
+}
+else if(TempData["AlertMessage"] == "Serie Updated successfully..."){
+        <div class="alert alert-info">
+            <strong>Success !</strong>@TempData["AlertMessage"]
+        </div>
+    }
+else if(TempData["AlertMessage"] == "Serie Deleted successfully..."){
+        <div class="alert alert-danger">
+            <strong>Success !</strong>@TempData["AlertMessage"]
+        </div>
+    }
+else if(TempData["AlertMessage"] == "Serie Added successfully..."){
+        <div class="alert alert-success">
+            <strong>Success !</strong>@TempData["AlertMessage"]
+        </div>
+    }
+<div class="container pt-3 pb-5">
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Series Titel</th>
+                    <th scope="col">Land van Oorsprong</th>
+                    <th scope="col">Eerste publicatie</th>
+                    <th scope="col">Lopend</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Update</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in @Model.Series)
+                {
+                    <tr>
+                        <td>@item.serieTitel</td>
+                        <td>@item.land_van_oorsprong</td>
+                        <td>@item.eerste_publicatie.Year-@item.eerste_publicatie.Month-@item.eerste_publicatie.Day</td>
+                        @{
+                            if (item.lopend == 1)
+                            {
+                                <td>Ja</td>
+                            }
+                            else
+                            {
+                                <td>Nee</td>
+                            }
+                        }
+
+                        <form method="post">
+
+                            <input type="hidden" name="serieId" value="@item.serieId"/>
+                            <td>
+                                <button asp-page-handler="delete" class="btn btn-danger">Delete</button>
+                            </td>
+                        </form>
+                       <td><a href="/Serie/SerieUpdate/@item.serieId" class="btn btn-primary">update</a></td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="div row">
+        <div class="col ">
+            <div class="card border-success col-12">
+                <div class="card-header bg-transparent border-success"> Nieuw Serie Toevoegen</div>
+                <h1 class="p-2">Voeg een serie toe</h1>
+                <div class="p-4">
+                    <form method="post" class="d-inline mt-10 border-dark" asp-page-handler="add">
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label">Serie Titel</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" asp-for="serie" placeholder="Enter a Serie Titel" required="required"/>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label">Land van oorsprong</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" asp-for="landvanoorsprng" placeholder="voeg land van oorsprong toe" required="required"/><br/>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label">Datum publicatie:</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="datetime-local" asp-for="eerstepublicatie" placeholder="voeg eerste publicatie toe" required="required"/><br/>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label">Nog lopend? </label>
+                            <div class="col-sm-10">
+                                <input class="form-control" type="text" name="stringlopend" placeholder="is het lopend" required="required"/><br/>
+                            </div>
+                        </div>
+                        <div class="p-2">
+                            <button asp-page-handler="add" class="btn btn-primary">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

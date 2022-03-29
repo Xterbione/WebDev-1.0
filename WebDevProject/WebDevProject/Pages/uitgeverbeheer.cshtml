@@ -9,6 +9,28 @@
     Layout = "Shared/_Layout";
 }
 
+@if (TempData["AlertMessage"]==null)
+{
+}
+else if (TempData["AlertMessage"]=="Uitgever Deleted successfully...")
+{
+    <div class="alert alert-danger">
+        <strong>Success !</strong>@TempData["AlertMessage"]
+    </div>
+}
+else if (TempData["AlertMessage"]=="Uitgever Added successfully...")
+{
+    <div class="alert alert-success">
+        <strong>Success !</strong>@TempData["AlertMessage"]
+    </div>
+}
+else if (TempData["AlertMessage"] == "Uitgever Updated successfully...")
+{
+    <div class="alert alert-info">
+        <strong>Success !</strong>@TempData["AlertMessage"]
+    </div>
+}
+
 
 <div class="container pt-3 pb-5">
     <div class="row">
@@ -18,7 +40,8 @@
                 <tr>
                     <th scope="col">Uitgevers</th>
                     <th scope="col">Delete</th>
-
+                    <th scope="col">Update uitgever</th>
+                    <th scope="col">Update</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -27,8 +50,10 @@
                     <tr>
                         <td>@item.uitgever_naam</td>
                         <form method="post">
-                            <input type="hidden" name="hiddenUitgever" value="@item.uitgever_naam"/>
+                            <input type="hidden" name="hiddenUitgever" value="@item.uitgeverId"/>
                             <td><button asp-page-handler="delete" class="btn btn-danger">Delete</button></td>
+                            <td> <input type="text" name="uitgever" value="@item.uitgever_naam" placeholder="Update uitgever"/></td>
+                            <td><button asp-page-handler="update" class="btn btn-primary">Update</button></td>
                         </form>
                     </tr>
                 }
