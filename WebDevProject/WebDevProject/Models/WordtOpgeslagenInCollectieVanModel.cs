@@ -1,13 +1,14 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.VisualBasic;
 
 namespace WebDevProject.Models;
 
 public class WordtOpgeslagenInCollectieVanModel
 {
-    
+    [Required(ErrorMessage = "Er is geen druk-Id toegevoegd"),Display(Name = "Druk Id")]
     public int druk_id { get; set; }
 
-
+    [Required(ErrorMessage = "Er is geen gebruiker-Id toegevoegd")]
     public int gebruiker_id { get; set; } = 0;
     
     [Display(Name = "Staat")]
