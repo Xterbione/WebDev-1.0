@@ -23,7 +23,15 @@ namespace WebDevProject.Repositories
             var strips = connection.Query<SerieModel>(sql);
             return strips;
         }
-        
+
+        public SerieModel Get(int serieId)
+        {
+            string sql = "SELECT * FROM serie WHERE serieId = @serieId";
+            using var connection = GetConnection();
+            SerieModel serie = connection.QuerySingle<SerieModel>(sql, new {serieId});
+            return serie;
+        }
+
         /// <summary>
         /// deleting a serie 
         /// </summary>
