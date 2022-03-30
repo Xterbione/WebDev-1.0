@@ -183,6 +183,20 @@ namespace WebDevProject.Repositories
         }
 
         /// <summary>
+        /// counts all drukken with a certain stripboek_id
+        /// </summary>
+        /// <param name="stripboek_id"></param>
+        /// <returns></returns>
+        public int countStrip(int stripboek_id)
+        {
+            string sql = "SELECT COUNT(drukId) FROM druk where stripboek_id=@stripboek_id";
+            using var connection = GetConnection();
+            int count = connection.ExecuteScalar<int>(sql, new { stripboek_id });
+            return count;
+
+        }
+
+        /// <summary>
         /// deletes a single druk from the db based on its id. also deletes associating relational entries
         /// </summary>
         /// <param name="drukid"></param>
