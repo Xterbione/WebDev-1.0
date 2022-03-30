@@ -6,71 +6,75 @@
     <title>@Model.StripboekModel.stripboektitel</title>
 </head>
 <body>
-<div class="container">
-    <h1 class="text-center mb-3">@Model.StripboekModel.stripboektitel</h1>
-    <div class="row">
-        <div class="col-md-6">
-            <img src="https://us.123rf.com/450wm/piotrurakau/piotrurakau1707/piotrurakau170700026/82024829-de-grappige-achtergrond-van-de-boekpagina-met-lege-kleurrijke-toespraakbellen-in-pop-artstijl-strale.jpg?ver=6" class="card-img-top" alt="...">
-            <p class="text-center">Cover</p>
-        </div>
-        <div class="col-md-6 mb-3">
-            <h2 class="mb-1">Stripboek gegevens</h2>
-            <ul class="mb-3">
-                <li>Volgnummer: @Model.StripboekModel.volgnummer</li>
-                <li>Aantal pagina's: @Model.StripboekModel.aantal_paginas</li>
-                <li>Genre: @Model.StripboekModel.GenreModel.genre</li>
-            </ul>
-            <h2 class="mb-1">Serie: @Model.StripboekModel.SerieModel.serieTitel</h2>
-            <ul>
-                <li>Eerste publicatie: @Model.StripboekModel.SerieModel.eerste_publicatie</li>
-                <li>Eerste publicatie: @Model.StripboekModel.SerieModel.land_van_oorsprong</li>
-                @{
-                    if (@Model.StripboekModel.SerieModel.lopend == 1)
-                    {
-                        <li>Lopend: Yes</li>
+    <div class="container">
+        <h1 class="text-center mb-3">@Model.StripboekModel.stripboektitel</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img src="https://us.123rf.com/450wm/piotrurakau/piotrurakau1707/piotrurakau170700026/82024829-de-grappige-achtergrond-van-de-boekpagina-met-lege-kleurrijke-toespraakbellen-in-pop-artstijl-strale.jpg?ver=6" class="card-img-top" alt="...">
+                <p class="text-center">Cover</p>
+            </div>
+            <div class="col-md-6 mb-3">
+                <h2 class="mb-1">Stripboek gegevens</h2>
+                <ul class="mb-3">
+                    <li>Volgnummer: @Model.StripboekModel.volgnummer</li>
+                    <li>Aantal pagina's: @Model.StripboekModel.aantal_paginas</li>
+                    <li>Genre: @Model.StripboekModel.GenreModel.genre</li>
+                </ul>
+                <h2 class="mb-1">Serie: @Model.StripboekModel.SerieModel.serieTitel</h2>
+                <ul>
+                    <li>Eerste publicatie: @Model.StripboekModel.SerieModel.eerste_publicatie</li>
+                    <li>Eerste publicatie: @Model.StripboekModel.SerieModel.land_van_oorsprong</li>
+                    @{
+                        if (@Model.StripboekModel.SerieModel.lopend == 1)
+                        {
+                            <li>Lopend: Yes</li>
+                        }
+                        else
+                        {
+                            <li>Lopend: No</li>
+                        }
                     }
-                    else
-                    {
-                        <li>Lopend: No</li>
-                    }
-                }
-            </ul>
+                </ul>
+                <form method="get" action="/Collectie/Toevoegen">
+                    <input type="hidden" value="@Model.StripboekModel.StripboekId" name="stripboekId" />
+                    <button type="submit" class="btn btn-primary">toevoegen aan collectie</button>
+                </form>
+            </div>
         </div>
-    </div>
-    <div class="row justify-content-center">
-        @{
-            if (Model.Drukken.Count() == 0)
-            {
-                <h3 class="alert-danger">Dit stripboek heeft nog geen druk informatie</h3>
-            }
-            else
-            {
-                <h3 class="text-center mb-3">Drukken</h3>
-                @foreach (var druk in Model.Drukken)
+        <div class="row justify-content-center">
+            @{
+                if (Model.Drukken.Count() == 0)
                 {
-                    <div class="card col-3 mb-3" style="width: 18rem;">
-                        <img src="https://us.123rf.com/450wm/piotrurakau/piotrurakau1707/piotrurakau170700026/82024829-de-grappige-achtergrond-van-de-boekpagina-met-lege-kleurrijke-toespraakbellen-in-pop-artstijl-strale.jpg?ver=6" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Druknummer: @druk.druknummer </h5>
-                            <p class="card-text">
-                            <ul>
-                                <li>Druk datum: @druk.druk_datum.Day-@druk.druk_datum.Month-@druk.druk_datum.Year</li>
-                                <li>Oplage: @druk.oplage</li>
-                                <li>Waarde: @druk.waarde</li>
-                                <li>@druk.</li>
-                                @{
-                                    foreach (var item3 in druk.werkenAan)
-                                    {
-                                        <li>@(item3.rol): @item3.CreatorModel.creator_naam</li>
-                                    }
-                                }
-                                <li>Isbn: @druk.isbn</li>
-                            </ul>
+                    <h3 class="alert-danger">Dit stripboek heeft nog geen druk informatie</h3>
+                }
+                else
+                {
+                    <h3 class="text-center mb-3">Drukken</h3>
+                    @foreach (var druk in Model.Drukken)
+                    {
+                        <div class="card col-3 mb-3" style="width: 18rem;">
+                            <img src="https://us.123rf.com/450wm/piotrurakau/piotrurakau1707/piotrurakau170700026/82024829-de-grappige-achtergrond-van-de-boekpagina-met-lege-kleurrijke-toespraakbellen-in-pop-artstijl-strale.jpg?ver=6" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Druknummer: @druk.druknummer </h5>
+                                <p class="card-text">
+                                    <ul>
+                                        <li>Druk datum: @druk.druk_datum.Day-@druk.druk_datum.Month-@druk.druk_datum.Year</li>
+                                        <li>Oplage: @druk.oplage</li>
+                                        <li>Waarde: @druk.waarde</li>
+                                        <li>@druk.</li>
+                                        @{
+                                            foreach (var item3 in druk.werkenAan)
+                                            {
+                                                <li>@(item3.rol): @item3.CreatorModel.creator_naam</li>
+                                            }
+                                        }
+                                        <li>Isbn: @druk.isbn</li>
+                                    </ul>
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
             }
-        }
+        </div>
     </div>
-</div>
 </body>
