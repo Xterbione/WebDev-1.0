@@ -15,7 +15,10 @@
                  <option disabled>Kies een stripboek</option>
                  @foreach (StripboekModel stripboek in Model.Stripboeken)
                  {
-                     <option value="@stripboek.StripboekId">@stripboek.stripboektitel</option>
+                     if (Model.stripboekrepo.countStrip(stripboek.StripboekId) > 0)
+                     {
+                     <option value="@stripboek.StripboekId">@stripboek.stripboektitel</option> 
+                     }
                  }
              </select>
          </div>
