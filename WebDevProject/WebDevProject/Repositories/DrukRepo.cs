@@ -69,6 +69,27 @@ namespace WebDevProject.Repositories
                     }, new {stripboekId}, splitOn: "stripboekId, serieId, genreId, uitgeverId");
             return strips;        
         }
+        
+        public IEnumerable<DrukModel> GetByDrukId(int drukId)
+        {
+            sql = sql + "WHERE drukId = @drukId";
+            
+            using var connection = GetConnection();
+            //normal query for list
+            IEnumerable<DrukModel> strips = connection
+                .Query<DrukModel, StripboekModel, SerieModel, GenreModel, UitgeverModel
+                    , DrukModel>(sql,
+                    (DrukModel, StripboekModel, SerieModel, GenreModel, UitgeverModel) =>
+                    {
+                        //vul het main object met de aangemaakte objecten
+                        StripboekModel.SerieModel = SerieModel;
+                        StripboekModel.GenreModel = GenreModel;
+                        DrukModel.StripboekModel = StripboekModel;
+                        DrukModel.UitgeverModel = UitgeverModel;
+                        return DrukModel;
+                    }, new {drukId}, splitOn: "stripboekId, serieId, genreId, uitgeverId");
+            return strips;        
+        }
 
         /// <summary>
         /// Zoekfunctie om te zoeken in de database.

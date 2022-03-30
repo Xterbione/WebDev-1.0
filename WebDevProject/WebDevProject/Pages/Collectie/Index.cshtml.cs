@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using  System.Text.Json;
+using Microsoft.NET.StringTools;
 using WebDevProject.Models;
 using WebDevProject.Repositories;
 
@@ -9,6 +10,9 @@ namespace WebDevProject.Pages.Collectie;
 public class Index : PageModel
 {
     public IEnumerable<WordtOpgeslagenInCollectieVanModel> WordtOpgeslagenInCollectieVanModels { get; set; }
+
+    public string succes { get; set; }
+    public bool IsToegevoegd { get; set; }
    
     public bool WasIngelogd{ get; set; }
 
@@ -19,11 +23,12 @@ public class Index : PageModel
     public WordtOpgeslagenInCollectieVanModel WordtOpgeslagenInCollectieVanModel { get; set; }
     public List<string> series = new List<string>();
 
-    public IActionResult OnGet()
+    public IActionResult OnGet(string succes, bool isToegevoegd)
     {
+        this.succes = succes;
+        IsToegevoegd = isToegevoegd;
         if (HttpContext.Session.GetString("cockie") != null)
         {
-        
             string sessionstring = HttpContext.Session.GetString("cockie");
             Gebruiker = JsonSerializer.Deserialize<GebruikerModel>(sessionstring);
 
@@ -39,6 +44,6 @@ public class Index : PageModel
             return Page();
         }
         return new RedirectToPageResult("/Login");
-
     }
+    
 }

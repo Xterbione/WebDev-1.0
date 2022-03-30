@@ -23,11 +23,17 @@ public class Toevoegen : PageModel
     {
         Drukken = new DrukRepo().Get(stripboekId);
     }
+    
     public IActionResult OnPost()
     {
         wordtOpgeslagenInCollectieVanModel.gebruiker_id = GetUserId();
         new WordtOpgeslagenInCollectieRepo().Add(wordtOpgeslagenInCollectieVanModel);
-        return new RedirectToPageResult(nameof(Collectie.Index));
+        DrukRepo drukRepo = new DrukRepo();
+        var druk = drukRepo.GetByDrukId(wordtOpgeslagenInCollectieVanModel.druk_id);
+        var drukModel = druk.First();
+        string succes = $"Je hebt het boek {drukModel.StripboekModel.stripboektitel} met druknummer {drukModel.druknummer} toegevoegd";
+        return RedirectToPage(nameof(Collectie.Index), new { succes = succes, isToegevoegd = true});
+
     }
 
     public int GetUserId()
