@@ -8,7 +8,7 @@ namespace WebDevProject.Pages;
 
 public class Stripboek : PageModel
 {
-    private DrukRepo DrukRepo = new ();
+    public DrukRepo DrukRepo = new ();
     private GenreRepo GenreRepo = new ();
     private StripboekRepo stripboekRepo = new ();
     private SerieRepo SerieRepo = new ();

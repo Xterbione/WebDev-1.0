@@ -35,10 +35,14 @@
                         }
                     }
                 </ul>
-                <form method="get" action="/Collectie/Toevoegen">
-                    <input type="hidden" value="@Model.StripboekModel.StripboekId" name="stripboekId" />
-                    <button type="submit" class="btn btn-primary">toevoegen aan collectie</button>
-                </form>
+                @if (Model.DrukRepo.countStrip(Model.StripboekModel.StripboekId) > 0 && !string.IsNullOrWhiteSpace(HttpContext.Session.GetString("cockie")))
+                {
+                    <form method="get" action="/Collectie/Toevoegen">
+                        <input type="hidden" value="@Model.StripboekModel.StripboekId" name="stripboekId" />
+                        <button type="submit" class="btn btn-primary">toevoegen aan collectie</button>
+                    </form>
+                }
+
             </div>
         </div>
         <div class="row justify-content-center">
