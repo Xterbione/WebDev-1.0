@@ -71,13 +71,13 @@
                     }
 
                 </ul>
-                <form class="d-flex" method="get" action="Zoekresultaten">
-                    <select class="form-control" name="option" id="option">
-                        <option selected disabled>Selecteer categorie</option>
+                <form class="d-flex" method="get" action="/Zoekresultaten">
+                    <select required class="form-control" name="option" id="option">
+                        <option selected disabled value="stripboektitel">Selecteer een filter</option>
                         <option value="isbn">isbn</option>
                         <option value="stripboektitel">stripboek titel</option>
                     </select>
-                    <input name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <input required name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-light" type="submit">Search</button>
                 </form>
             </div>
